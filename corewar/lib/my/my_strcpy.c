@@ -1,0 +1,17 @@
+/*
+** EPITECH PROJECT, 2020
+** CPE_lemin_2019
+** File description:
+** my_strcpy
+*/
+
+char *my_strcpy(char *dest, char *src)
+{
+    unsigned int i = 0;
+
+    dest[0] = '\0';
+    for (i = 0 ; src[i] ; i++)
+        dest[i] = src[i];
+    dest[i] = '\0';
+    return (dest);
+}
