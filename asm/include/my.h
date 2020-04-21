@@ -18,6 +18,7 @@
     void my_strarr_remove_empty(char **arr);
     void my_strarr_rotate(char **arr, int index);
 
+    bool my_char_is_num(char const c);
     bool my_str_isnum_pos(char const *str);
     bool my_str_contains(char const *str, char const *to_find);
     bool my_str_ends(char const *str, char const *end);
