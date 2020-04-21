@@ -29,6 +29,8 @@ SRC		=	my_atoi.c \
 			my_sqrt.c \
 			my_put_nbr.c \
 			my_strcat.c \
+			my_str_ends.c \
+			my_str_is_empty.c \
 
 OBJ		=	$(SRC:.c=.o)
 

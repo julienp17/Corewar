@@ -18,6 +18,8 @@
 
     bool my_str_isnum_pos(char const *str);
     bool my_str_contains(char const *str, char const *to_find);
+    bool my_str_ends(char const *str, char const *end);
+    bool my_str_is_empty(char const *str);
 
     int my_atoi(char const *str);
     int my_strcmp(char const *s1, char const *s2);
