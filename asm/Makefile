@@ -14,7 +14,15 @@ MAIN_F		=	main.c
 SRC			=	$(addprefix $(SRC_D), $(SRC_F))
 OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
-SRC_F		=
+SRC_F		=	assemble.c \
+				get_output_filename.c \
+				op.c \
+				encode_instruction.c \
+				swap_endianess.c \
+				parse_instruction.c \
+				file_control/get_file_buffer.c \
+				file_control/get_file_lines.c \
+				file_control/get_file_size.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)
