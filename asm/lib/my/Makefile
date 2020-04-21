@@ -31,6 +31,7 @@ SRC		=	my_atoi.c \
 			my_strcat.c \
 			my_str_ends.c \
 			my_str_is_empty.c \
+			my_strdupcat.c \
 
 OBJ		=	$(SRC:.c=.o)
 

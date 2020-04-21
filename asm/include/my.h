@@ -29,8 +29,9 @@
     unsigned int my_count_char(char const *str, char const to_count);
     unsigned int my_count_until_sep(char const *str, char const sep);
 
-    char *my_strcpy(char *dest, char *src);
+    char *my_strcpy(char *dest, char const *src);
     char *my_strdup(char const *src);
+    char *my_strdupcat(char const *s1, char const *s2);
     char *my_revstr(char *str);
     char *my_int_to_strnum(int nb);
     char **my_str_to_word_array(char const *str, char const sep);
