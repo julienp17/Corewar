@@ -2,5 +2,9 @@ unit_tests
 *.o
 *.vgcore
 *.gc*
-lib/libmy.a
-lib/my/libmy.a
+asm/asm
+corewar/corewar
+asm/lib/libmy.a
+asm/lib/my/libmy.a
+corewar/lib/libmy.a
+corewar/lib/my/libmy.a
