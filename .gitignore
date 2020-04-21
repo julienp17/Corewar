@@ -1,0 +1,8 @@
+asm
+corewar
+unit_tests
+*.o
+*.vgcore
+*.gc*
+lib/libmy.a
+lib/my/libmy.a
