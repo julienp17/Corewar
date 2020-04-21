@@ -32,6 +32,10 @@ SRC		=	my_atoi.c \
 			my_str_ends.c \
 			my_str_is_empty.c \
 			my_strdupcat.c \
+			my_strarr_remove_empty.c \
+			my_strarr_rotate.c \
+			my_str_get_index.c \
+			my_clean_str.c \
 
 OBJ		=	$(SRC:.c=.o)
 

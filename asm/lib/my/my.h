@@ -15,6 +15,8 @@
     void my_puterr(char const *str);
     void my_put_nbr(int nb);
     void my_free_str_array(char **arr);
+    void my_strarr_remove_empty(char **arr);
+    void my_strarr_rotate(char **arr, int index);
 
     bool my_str_isnum_pos(char const *str);
     bool my_str_contains(char const *str, char const *to_find);
@@ -23,6 +25,7 @@
 
     int my_atoi(char const *str);
     int my_strcmp(char const *s1, char const *s2);
+    int my_str_get_index(char const *str, char const to_find);
     unsigned int my_intlen(int nb);
     unsigned int my_strarr_len(char **arr);
     unsigned int my_strlen(char const *str);
@@ -34,6 +37,7 @@
     char *my_strdupcat(char const *s1, char const *s2);
     char *my_revstr(char *str);
     char *my_int_to_strnum(int nb);
+    char *my_clean_str(char *str);
     char **my_str_to_word_array(char const *str, char const sep);
     char *my_strcat( char *s1, char *s2);
 
