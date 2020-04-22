@@ -40,7 +40,8 @@ static int encode(char const *output_filename, char **instructions)
         my_puterr("Error opening file.\n");
         return (EXIT_FAILURE);
     }
-    for (uint i = 0 ; instructions[i] && status == EXIT_SUCCESS ; i++)
+    status = encode_header(fd, instructions);
+    for (uint i = 0 ; status == EXIT_SUCCESS && instructions[i] ; i++)
         status = encode_instruction(fd, instructions[i]);
     if (close(fd) < 0) {
         my_puterr("Error closing file.\n");

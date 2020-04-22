@@ -28,10 +28,6 @@
     #define ASM_EXT         ".s"
     #define COR_EXT         ".cor"
     #define REGISTER_CHAR   'r'
-    #define REG_CB          0b01
-    #define DIR_CB          0b10
-    #define IND_CB          0b11
-
     typedef union param_value {
         int8_t reg;
         int16_t indirect;
@@ -41,6 +37,7 @@
     typedef unsigned int uint;
 
     int assemble(char const *filename);
+    int encode_header(int fd, char **instructions);
     int encode_instruction(int fd, char const *instruction);
     char *get_output_filename(char const *filename);
 
