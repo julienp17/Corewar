@@ -37,6 +37,9 @@ SRC		=	my_atoi.c \
 			my_str_get_index.c \
 			my_clean_str.c \
 			my_char_is_num.c \
+			my_str_delim.c \
+			my_strncmp.c \
+			my_str_beg.c
 
 OBJ		=	$(SRC:.c=.o)
 

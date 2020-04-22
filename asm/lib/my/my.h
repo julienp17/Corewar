@@ -23,9 +23,11 @@
     bool my_str_contains(char const *str, char const *to_find);
     bool my_str_ends(char const *str, char const *end);
     bool my_str_is_empty(char const *str);
+    bool my_str_beg(char const *src, char const *beg);
 
     int my_atoi(char const *str);
     int my_strcmp(char const *s1, char const *s2);
+    int my_strncmp(char const *s1, char const *s2, unsigned int n);
     int my_str_get_index(char const *str, char const to_find);
     unsigned int my_intlen(int nb);
     unsigned int my_strarr_len(char **arr);
@@ -34,6 +36,7 @@
     unsigned int my_count_until_sep(char const *str, char const sep);
 
     char *my_strcpy(char *dest, char const *src);
+    char *my_str_delim(char const *str, char const beg, char const end);
     char *my_strdup(char const *src);
     char *my_strdupcat(char const *s1, char const *s2);
     char *my_revstr(char *str);
