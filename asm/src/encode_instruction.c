@@ -53,11 +53,11 @@ static ssize_t write_coding_byte(int fd, char nbr_args, char **args)
 
     for (int i = 0 ; args[i] ; i++) {
         if (args[i][0] == REGISTER_CHAR)
-            coding_byte = (coding_byte << 2) + REG_CB;
+            coding_byte = (coding_byte << 2) + T_REG;
         else if (args[i][0] == DIRECT_CHAR)
-            coding_byte = (coding_byte << 2) + DIR_CB;
+            coding_byte = (coding_byte << 2) + T_DIR;
         else if (my_char_is_num(args[i][0]))
-            coding_byte = (coding_byte << 2) + IND_CB;
+            coding_byte = (coding_byte << 2) + T_IND;
     }
     for (int i = nbr_args ; i < MAX_ARGS_NUMBER ; i++)
         coding_byte <<= 2;
