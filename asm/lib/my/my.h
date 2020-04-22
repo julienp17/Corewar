@@ -16,6 +16,7 @@
     void my_put_nbr(int nb);
     void my_free_str_array(char **arr);
     void my_strarr_remove_empty(char **arr);
+    void my_str_rotate(char *str, int index);
     void my_strarr_rotate(char **arr, int index);
 
     bool my_char_is_num(char const c);

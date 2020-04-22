@@ -15,7 +15,7 @@ char *my_clean_str(char *str)
     int j = 0;
 
     while (str[0] && is_unclean(str[0]))
-        str++;
+        my_str_rotate(str, 0);
     for (int i = my_strlen(str) - 1 ; i > 0 && is_unclean(str[i]) ; i--)
         str[i] = '\0';
     for (int i = 0 ; str[i] ; i++) {
