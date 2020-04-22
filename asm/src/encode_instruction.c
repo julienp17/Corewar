@@ -18,7 +18,7 @@ int encode_instruction(int fd, char const *instruction)
     char **tokens = NULL;
     int status = 0;
 
-    tokens = parse_instruction(my_strdup(instruction));
+    tokens = parse_instruction(instruction);
     if (tokens == NULL)
         return (EXIT_FAILURE);
     op = get_op_by_name(tokens[0]);
@@ -28,6 +28,7 @@ int encode_instruction(int fd, char const *instruction)
         return (EXIT_FAILURE);
     }
     status = write_instruction(fd, op, tokens);
+    my_free_str_array(tokens);
     return (status);
 }
 

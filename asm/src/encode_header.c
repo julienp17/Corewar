@@ -53,6 +53,7 @@ static int encode_program_name(int fd, char const *program_name_line)
         return (EXIT_FAILURE);
     }
     my_strcpy(program_name, delim);
+    free(delim);
     if (write(fd, program_name, PROG_NAME_LENGTH) < 0) {
         my_puterr("Error writing program name.\n");
         return (EXIT_FAILURE);
@@ -72,6 +73,7 @@ static int encode_program_comment(int fd, char const *program_comment_line)
             return (EXIT_FAILURE);
         }
         my_strcpy(program_comment, delim);
+        free(delim);
     } else {
         my_puterr("Warning : No comment specified.\n");
     }
