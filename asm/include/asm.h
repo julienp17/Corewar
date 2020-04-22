@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** Corewar
+** Corewar Assembler
 ** File description:
 ** Assembler header file
 */
@@ -14,6 +14,7 @@
     #include <sys/types.h>
     #include <unistd.h>
     #include <fcntl.h>
+    #include <stdbool.h>
     #include "op.h"
 
     #define ASM_HELP   \
@@ -29,7 +30,7 @@
     #define COR_EXT         ".cor"
     #define REGISTER_CHAR   'r'
     typedef union param_value {
-        int8_t reg;
+        int8_t  reg;
         int16_t indirect;
         int32_t direct;
     } param_value_t;
@@ -37,12 +38,15 @@
     typedef unsigned int uint;
 
     int assemble(char const *filename);
-    int encode_header(int fd, char **instructions);
-    int encode_instruction(int fd, char const *instruction);
-    char *get_output_filename(char const *filename);
+    char *get_output_filename(char const *filename);;
 
     char **parse_instructions_from_file(char const *filename);
     char **parse_instruction(char const *instruction);
+
+    int encode_to_file(char const *output_filename, char **instructions);
+    int encode(int fd, char **instructions);
+    int encode_header(int fd, char **instructions);
+    int encode_instruction(int fd, char const *instruction);
 
     op_t get_op_by_name(char const *name);
     int16_t swap_int16(int16_t val);
