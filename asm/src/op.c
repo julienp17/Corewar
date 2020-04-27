@@ -5,6 +5,7 @@
 ** op
 */
 
+#include "asm.h"
 #include "op.h"
 #include "my.h"
 
@@ -42,4 +43,17 @@ op_t get_op_by_name(char const *name)
         if (my_strcmp(op_tab[i].mnemonique, name) == 0)
             return (op_tab[i]);
     return (op_tab[i]);
+}
+
+int get_argument_type(char const *arg)
+{
+    if (arg[0] == REGISTER_CHAR)
+        return (T_REG);
+    if (arg[0] == DIRECT_CHAR)
+        return (T_DIR);
+    if (my_char_is_num(arg[0]))
+        return (T_IND);
+    if (my_str_ends_char(arg, LABEL_CHAR))
+        return (T_LAB);
+    return (0);
 }
