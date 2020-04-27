@@ -6,5 +6,7 @@ asm/asm
 corewar/corewar
 asm/lib/libmy.a
 asm/lib/my/libmy.a
+asm/reference/*
+corewar/reference/*
 corewar/lib/libmy.a
 corewar/lib/my/libmy.a
