@@ -41,6 +41,9 @@ SRC		=	my_atoi.c \
 			my_strncmp.c \
 			my_str_beg.c \
 			my_str_rotate.c \
+			my_str_ends_char.c \
+			my_str_contains_char.c \
+			my_strarr_put.c \
 
 OBJ		=	$(SRC:.c=.o)
 

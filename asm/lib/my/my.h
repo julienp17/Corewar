@@ -14,6 +14,7 @@
     void my_putstr(char const *str);
     void my_puterr(char const *str);
     void my_put_nbr(int nb);
+    void my_strarr_put(char **arr);
     void my_free_str_array(char **arr);
     void my_strarr_remove_empty(char **arr);
     void my_str_rotate(char *str, int index);
@@ -21,10 +22,12 @@
 
     bool my_char_is_num(char const c);
     bool my_str_isnum_pos(char const *str);
-    bool my_str_contains(char const *str, char const *to_find);
-    bool my_str_ends(char const *str, char const *end);
-    bool my_str_is_empty(char const *str);
     bool my_str_beg(char const *src, char const *beg);
+    bool my_str_contains(char const *str, char const *to_find);
+    bool my_str_contains_char(char const *str, char const c);
+    bool my_str_ends(char const *str, char const *end);
+    bool my_str_ends_char(char const *str, char const end);
+    bool my_str_is_empty(char const *str);
 
     int my_atoi(char const *str);
     int my_strcmp(char const *s1, char const *s2);
