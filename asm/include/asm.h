@@ -38,10 +38,11 @@
     typedef unsigned int uint;
 
     int assemble(char const *filename);
-    char *get_output_filename(char const *filename);;
 
     char **parse_instructions_from_file(char const *filename);
     char **parse_instruction(char const *instruction);
+
+    bool instruction_is_correct(char **tokens);
 
     int encode_to_file(char const *output_filename, char **instructions);
     int encode(int fd, char **instructions);
@@ -49,6 +50,7 @@
     int encode_instruction(int fd, char const *instruction);
 
     op_t get_op_by_name(char const *name);
+    int get_argument_type(char const *arg);
     int16_t swap_int16(int16_t val);
     int32_t swap_int32(int32_t val);
 #endif
