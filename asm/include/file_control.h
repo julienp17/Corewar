@@ -11,4 +11,5 @@
     unsigned int get_file_size(char const *file_path);
     char *get_file_buffer(char const *file_path);
     char **get_file_lines(char const *file_path);
+    char *get_pretty_filename(char *ugly_filename);
 #endif
