@@ -32,6 +32,11 @@ int encode(int fd, char **instructions)
     int status = EXIT_SUCCESS;
 
     status = encode_header(fd, instructions);
+    if (status == EXIT_FAILURE)
+        return (EXIT_FAILURE);
+    my_strarr_rotate(instructions, 0);
+    if (my_str_beg(instructions[0], COMMENT_CMD_STRING))
+        my_strarr_rotate(instructions, 0);
     for (uint i = 0 ; status == EXIT_SUCCESS && instructions[i] ; i++)
         status = encode_instruction(fd, instructions[i]);
     return (status);
