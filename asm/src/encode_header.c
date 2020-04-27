@@ -10,19 +10,25 @@
 
 static int encode_exec_magic(int fd);
 static int encode_program_name(int fd, char const *program_name_line);
+static int encode_unknown_nb(int fd, char **instructions);
 static int encode_program_comment(int fd, char const *program_comment_line);
 
 int encode_header(int fd, char **instructions)
 {
+    int offset = 0;
+
     if (encode_exec_magic(fd) == EXIT_FAILURE)
         return (EXIT_FAILURE);
     if (encode_program_name(fd, instructions[0]) == EXIT_FAILURE)
         return (EXIT_FAILURE);
+    if (encode_unknown_nb(fd, instructions) == EXIT_FAILURE)
+        return (EXIT_FAILURE);
     if (encode_program_comment(fd, instructions[1]) == EXIT_FAILURE)
         return (EXIT_FAILURE);
-    my_strarr_rotate(instructions, 0);
-    if (my_str_beg(instructions[0], COMMENT_CMD_STRING))
-        my_strarr_rotate(instructions, 0);
+    if (write(fd, &(offset), sizeof(offset)) < 0) {
+        my_puterr("Error writing program header offset.\n");
+        return (EXIT_FAILURE);
+    }
     return (EXIT_SUCCESS);
 }
 
@@ -56,6 +62,22 @@ static int encode_program_name(int fd, char const *program_name_line)
     free(delim);
     if (write(fd, program_name, PROG_NAME_LENGTH) < 0) {
         my_puterr("Error writing program name.\n");
+        return (EXIT_FAILURE);
+    }
+    return (EXIT_SUCCESS);
+}
+
+static int encode_unknown_nb(int fd, char **instructions)
+{
+    int idk = 0;
+
+    (void)instructions;
+    if (write(fd, &(idk), sizeof(idk)) < 0) {
+        my_puterr("Error writing program unknown nb.\n");
+        return (EXIT_FAILURE);
+    }
+    if (write(fd, &(idk), sizeof(idk)) < 0) {
+        my_puterr("Error writing program unknown nb.\n");
         return (EXIT_FAILURE);
     }
     return (EXIT_SUCCESS);
