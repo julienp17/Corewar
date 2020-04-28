@@ -1,17 +1,34 @@
 /*
 ** EPITECH PROJECT, 2020
-** PSU_tetris_2019
+** Corewar ASM
 ** File description:
-** get_file_size
+** Return the number of bytes in a file
 */
 
-#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include "file_control.h"
+#include "my.h"
 
-unsigned int get_file_size(char const *filepath)
+ssize_t get_file_size(char const *filename)
 {
-    struct stat stats;
+    char buffer[READ_SIZE] = "";
+    int fd = 0;
+    ssize_t file_size = 0;
+    ssize_t read_size = 1;
 
-    if (stat(filepath, &stats) != 0)
+    fd = open(filename, O_RDONLY);
+    if (fd < 0) {
+        my_puterr("Coudln't open file.\n");
         return (-1);
-    return (stats.st_size);
+    }
+    while (read_size > 0) {
+        read_size = read(fd, buffer, READ_SIZE);
+        file_size += read_size;
+    }
+    if (close(fd) < 0) {
+        my_puterr("Coudln't open file.\n");
+        return (-1);
+    }
+    return (file_size);
 }
