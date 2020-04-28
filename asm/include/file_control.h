@@ -8,7 +8,11 @@
 #ifndef FILE_CONTROL_H_
     #define FILE_CONTROL_H_
 
-    unsigned int get_file_size(char const *file_path);
+    #include <sys/types.h>
+
+    #define READ_SIZE       1024
+
+    ssize_t get_file_size(char const *filename);
     char *get_file_buffer(char const *file_path);
     char **get_file_lines(char const *file_path);
     char *get_pretty_filename(char *ugly_filename);
