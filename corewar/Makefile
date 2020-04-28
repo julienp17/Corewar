@@ -14,8 +14,7 @@ MAIN_F		=	main.c
 SRC			=	$(addprefix $(SRC_D), $(SRC_F))
 OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
-SRC_F		=	decode.c \
-				get_file_size.c \
+SRC_F		=	get_file_size.c \
 				fill_buffer.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
