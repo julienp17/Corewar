@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
-#include "file_read.h"
+#include "file_control.h"
 
 static int allocate_buffer(char const *filename, buffer_t *buf);
 
@@ -26,8 +26,9 @@ int buffer_fill_from_file(char const *filename, buffer_t *buf)
         return (EXIT_FAILURE);
     }
     status = read(fd, buf->buf, buf->size);
-    if (status == -1)
-        fprintf(stderr, "ne m'oublie pas tristan stp, efface cette ligne et remplace par my_puterr\n");
+    if (status == -1) {
+        my_puterr("Error reading file.\n");
+    }
     if (close(fd) < 0) {
         // my_puterr("")
         return (EXIT_FAILURE);

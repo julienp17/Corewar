@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "file_read.h"
+#include "file_control.h"
 #include "op.h"
 
 int main(int ac, char **av)
