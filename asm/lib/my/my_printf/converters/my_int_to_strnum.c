@@ -13,8 +13,9 @@
 
 static bool check_is_neg(int *nb);
 
-char *my_int_to_strnum(int nb)
+char *my_int_to_strnum(va_list args)
 {
+    int nb = va_arg(args, int);
     int i = 0;
     bool is_neg = false;
     char *strnum = malloc(sizeof(char) * (my_intlen(nb) + 2));
@@ -28,8 +29,10 @@ char *my_int_to_strnum(int nb)
         strnum[i] = nb % 10 + '0';
         nb = nb / 10;
     }
-    if (is_neg)
-        strnum[i++] = '-';
+    if (is_neg) {
+        strnum[i] = '-';
+        i = i + 1;
+    }
     strnum[i] = '\0';
     return (my_revstr(strnum));
 }
