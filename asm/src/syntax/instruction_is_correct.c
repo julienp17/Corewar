@@ -10,11 +10,13 @@
 
 static bool label_is_correct(char const *label_str);
 static bool arguments_are_correct(op_t op, char **args);
+static bool argument_is_correct(op_t op, char const *arg, uint i);
 
 bool instruction_is_correct(char **tokens)
 {
     int i = 0;
     op_t op;
+    char **tokens = NULL;
 
     if (my_str_ends_char(tokens[0], LABEL_CHAR)) {
         i++;
@@ -23,8 +25,7 @@ bool instruction_is_correct(char **tokens)
     }
     op = get_op_by_name(tokens[i]);
     if (op.mnemonique == 0) {
-        my_puterr(tokens[i]);
-        my_puterr(" : Invalid instruction.\n");
+        my_eprintf("%s : Invalid instruction.\n", tokens[i]);
         return (false);
     }
     i++;
@@ -41,8 +42,7 @@ static bool label_is_correct(char const *label)
     }
     for (uint i = 0 ; label[i] != LABEL_CHAR && label[i] ; i++) {
         if (my_str_contains_char(LABEL_CHARS, label[i]) == false) {
-            my_puterr(label);
-            my_puterr(" : Invalid label name\n");
+            my_eprintf("%s : Invalid label name\n", label);
             return (false);
         }
     }
@@ -51,23 +51,37 @@ static bool label_is_correct(char const *label)
 
 static bool arguments_are_correct(op_t op, char **args)
 {
-    int arg_type = 0;
+    char *cmd = NULL;
 
+    cmd = op.mnemonique;
     if (my_strarr_len(args) != (unsigned int)(op.nbr_args)) {
-        my_puterr("Invalid number of arguments for '");
-        my_puterr(op.mnemonique);
-        my_puterr("' instruction\n");
+        my_eprintf("Invalid number of arguments for '%s' instruction.\n", cmd);
         return (false);
     }
-    for (uint i = 0 ; args[i] ; i++) {
-        arg_type = get_argument_type(args[i]);
-        if ((arg_type & op.type[i]) == 0) {
-            my_puterr(args[i]);
-            my_puterr(" : Invalid argument type for '");
-            my_puterr(op.mnemonique);
-            my_puterr("' instruction.\n");
+    for (uint i = 0 ; args[i] ; i++)
+        if (argument_is_correct(op, args[i], i) == false)
+            return (false);
+    return (true);
+}
+
+static bool argument_is_correct(op_t op, char const *arg, uint i)
+{
+    char *cmd = NULL;
+    int arg_type = 0;
+    int value = 0;
+
+    cmd = op.mnemonique;
+    arg_type = get_argument_type(arg);
+    if (arg_type == T_REG) {
+        value = my_atoi(arg + 1);
+        if (value < 1 || value > REG_NUMBER) {
+            my_eprintf("%s : Invalid register value.\n", arg);
             return (false);
         }
+    }
+    if ((arg_type & op.type[i]) == 0) {
+        my_eprintf("%s : Invalid argument type for '%s'\n", arg, cmd);
+        return (false);
     }
     return (true);
 }
