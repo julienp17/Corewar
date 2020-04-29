@@ -51,9 +51,23 @@ int get_argument_type(char const *arg)
         return (T_REG);
     if (arg[0] == DIRECT_CHAR)
         return (T_DIR);
+    if (arg[0] == LABEL_CHAR)
+        return (T_LAB);
     if (my_char_is_num(arg[0]))
         return (T_IND);
-    if (my_str_ends_char(arg, LABEL_CHAR))
-        return (T_LAB);
     return (0);
+}
+
+int get_argument_size(op_t op, char const *arg)
+{
+    int arg_type = 0;
+
+    arg_type = get_argument_type(arg);
+    if (arg_type == T_REG)
+        return (1);
+    if (arg_type == T_IND || arg_type == T_LAB)
+        return (IND_SIZE);
+    if (arg_type == T_DIR)
+        return (arg_is_index(op) ? IND_SIZE : DIR_SIZE);
+    return (-1);
 }
