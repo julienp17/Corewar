@@ -53,7 +53,7 @@ int get_argument_type(char const *arg)
         return (T_DIR);
     if (arg[0] == LABEL_CHAR)
         return (T_LAB);
-    if (my_char_is_num(arg[0]))
+    if (my_char_is_digit(arg[0]))
         return (T_IND);
     return (0);
 }
