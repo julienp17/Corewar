@@ -22,6 +22,8 @@ bool instruction_is_correct(char **tokens)
         if (label_is_correct(tokens[0]) == false)
             return (false);
     }
+    if (tokens[i] == NULL)
+        return (true);
     op = get_op_by_name(tokens[i]);
     if (op.mnemonique == 0) {
         my_eprintf("%s : Invalid instruction.\n", tokens[i]);

@@ -44,11 +44,11 @@ int encode(int fd, char **instructions)
     my_strarr_rotate(instructions, 0);
     if (my_str_beg(instructions[0], COMMENT_CMD_STRING))
         my_strarr_rotate(instructions, 0);
-    for (uint i = 0 ; bytes_written > 0 && instructions[i] ; i++) {
+    for (uint i = 0 ; bytes_written >= 0 && instructions[i] ; i++) {
         bytes_written = encode_instruction(fd, instructions[i], labels, total_bytes_written);
         total_bytes_written += bytes_written;
     }
-    if (bytes_written <= 0)
+    if (bytes_written < 0)
         return (EXIT_FAILURE);
     if (lseek(fd, sizeof(int) * 2 + sizeof(char) * PROG_NAME_LENGTH, SEEK_SET) < 0){
         my_puterr("Coudln't lseek back to program size.\n");
@@ -117,6 +117,8 @@ static int16_t instruction_get_offset(char const *instruction)
     tokens = parse_instruction(instruction);
     if (my_str_ends_char(tokens[0], LABEL_CHAR))
         my_strarr_rotate(tokens, 0);
+    if (tokens[0] == NULL)
+        return (0);
     op = get_op_by_name(tokens[0]);
     if (op.mnemonique == 0)
         return (-1);

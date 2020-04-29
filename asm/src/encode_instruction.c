@@ -25,6 +25,8 @@ ssize_t encode_instruction(int fd, char const *instruction, label_t **labels, ss
         return (-1);
     if (my_str_ends_char(tokens[0], LABEL_CHAR))
         my_strarr_rotate(tokens, 0);
+    if (tokens[0] == NULL)
+        return (0);
     bytes_written = write_instruction(fd, tokens, labels, current_offset);
     my_free_str_array(tokens);
     return (bytes_written);
