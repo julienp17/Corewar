@@ -53,7 +53,7 @@ static bool arguments_are_correct(op_t op, char **args)
 {
     int arg_type = 0;
 
-    if ((char)my_strarr_len(args) != op.nbr_args) {
+    if (my_strarr_len(args) != (unsigned int)(op.nbr_args)) {
         my_puterr("Invalid number of arguments for '");
         my_puterr(op.mnemonique);
         my_puterr("' instruction\n");
