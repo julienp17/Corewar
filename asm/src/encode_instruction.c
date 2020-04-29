@@ -9,43 +9,54 @@
 #include "asm.h"
 #include "my.h"
 
-static int write_instruction(int fd, op_t op, char **tokens);
+static ssize_t write_instruction(int fd, op_t op, char **tokens);
 static ssize_t write_coding_byte(int fd, char nbr_args, char **args);
 static ssize_t write_param_value(int fd, op_t op, char *arg);
 static bool arg_is_index(op_t op);
 
-int encode_instruction(int fd, char const *instruction)
+ssize_t encode_instruction(int fd, char const *instruction)
 {
     op_t op;
     char **tokens = NULL;
-    int status = 0;
+    ssize_t bytes_written = 0;
 
     tokens = parse_instruction(instruction);
     if (tokens == NULL)
-        return (EXIT_FAILURE);
+        return (-1);
     if (instruction_is_correct(tokens) == false)
-        return (EXIT_FAILURE);
+        return (-1);
     if (get_argument_type(tokens[0]) == T_LAB)
         my_strarr_rotate(tokens, 0);
     op = get_op_by_name(tokens[0]);
-    status = write_instruction(fd, op, tokens);
+    bytes_written = write_instruction(fd, op, tokens);
     my_free_str_array(tokens);
-    return (status);
+    return (bytes_written);
 }
 
-static int write_instruction(int fd, op_t op, char **tokens)
+static ssize_t write_instruction(int fd, op_t op, char **tokens)
 {
-    if (write(fd, &(op.code), sizeof(op.code)) < 0) {
-        my_puterr("Error writing to file.\n");
-        return (EXIT_FAILURE);
+    ssize_t total_bytes_written = 0;
+    ssize_t bytes_written = 0;
+
+    bytes_written = write(fd, &(op.code), sizeof(op.code));
+    if (bytes_written < 0) {
+        my_puterr("Error writing op code.\n");
+        return (-1);
     }
-    if (op.nbr_args != 1 || op.type[0] != T_DIR)
-        if (write_coding_byte(fd, op.nbr_args, tokens + 1) < 0)
-            return (EXIT_FAILURE);
-    for (int i = 1 ; tokens[i] ; i++)
-        if (write_param_value(fd, op, tokens[i]) < 0)
-            return (EXIT_FAILURE);
-    return (EXIT_SUCCESS);
+    total_bytes_written += bytes_written;
+    if (op.nbr_args != 1 || op.type[0] != T_DIR) {
+        bytes_written = write_coding_byte(fd, op.nbr_args, tokens + 1);
+        if (bytes_written < 0)
+            return (-1);
+        total_bytes_written += bytes_written;
+    }
+    for (int i = 1 ; tokens[i] ; i++) {
+        bytes_written = write_param_value(fd, op, tokens[i]);
+        if (bytes_written < 0)
+            return (-1);
+        total_bytes_written += bytes_written;
+    }
+    return (total_bytes_written);
 }
 
 static ssize_t write_coding_byte(int fd, char nbr_args, char **args)
