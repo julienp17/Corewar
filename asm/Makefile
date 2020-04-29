@@ -21,11 +21,12 @@ SRC_F		=	assemble.c \
 				encode_header.c \
 				instruction_is_correct.c \
 				swap_endianess.c \
-				parse_instruction.c \
+				parsing/parse_instruction.c \
 				file_control/get_file_buffer.c \
 				file_control/get_file_lines.c \
 				file_control/get_file_size.c \
 				file_control/get_pretty_filename.c \
+				structures/label/label_create.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)
