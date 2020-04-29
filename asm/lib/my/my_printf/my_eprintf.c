@@ -18,7 +18,7 @@ static char *my_get_formatted_string(char *format, va_list args);
 static char *my_get_format(char const *format_string);
 static format_t *my_init_format(char *org_format);
 
-int my_printf(char const *str, ...)
+int my_eprintf(char const *str, ...)
 {
     va_list args;
     char *format_string = my_strdup(str);
