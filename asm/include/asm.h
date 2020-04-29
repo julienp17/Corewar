@@ -47,7 +47,7 @@
     int encode_to_file(char const *output_filename, char **instructions);
     int encode(int fd, char **instructions);
     int encode_header(int fd, char **instructions);
-    int encode_instruction(int fd, char const *instruction);
+    ssize_t encode_instruction(int fd, char const *instruction);
 
     op_t get_op_by_name(char const *name);
     int get_argument_type(char const *arg);
