@@ -16,7 +16,6 @@ bool instruction_is_correct(char **tokens)
 {
     int i = 0;
     op_t op;
-    char **tokens = NULL;
 
     if (my_str_ends_char(tokens[0], LABEL_CHAR)) {
         i++;
