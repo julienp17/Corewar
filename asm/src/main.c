@@ -23,5 +23,5 @@ int main(int ac, char **av)
         return (EXIT_SUCCESS);
     }
     status = assemble(av[1]);
-    return (status);
+    return ((status == EXIT_FAILURE) ? 84 : 0);
 }
