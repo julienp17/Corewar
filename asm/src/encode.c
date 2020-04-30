@@ -26,7 +26,7 @@ int encode_to_file(char const *output_filename, char **instructions)
     status = encode(fd, instructions);
     if (close(fd) < 0) {
         my_puterr("Error closing file.\n");
-        return (EXIT_FAILURE);
+        status = EXIT_FAILURE;
     }
     return (status);
 }
