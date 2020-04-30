@@ -26,9 +26,9 @@ int buffer_fill_from_file(char const *filename, buffer_t *buf)
         return (EXIT_FAILURE);
     }
     status = read(fd, buf->buf, buf->size);
-    if (status == -1) {
-        my_puterr("Error reading file.\n");
-    }
+    // if (status == -1) {
+    //     my_puterr("Error reading file.\n");
+    // }
     if (close(fd) < 0) {
         // my_puterr("")
         return (EXIT_FAILURE);
