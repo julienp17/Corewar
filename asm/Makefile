@@ -31,7 +31,9 @@ SRC_F		=	assemble.c \
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)
 SRC_UT_D 	= 	tests/
-SRC_UT_F 	=
+SRC_UT_F 	=	test_parse_instruction.c \
+				test_instruction_is_correct.c \
+				test_swap_endianess.c \
 
 CFLAGS		=	$(WFLAGS) $(INC) $(LDFLAGS)
 

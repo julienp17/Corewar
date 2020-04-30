@@ -38,7 +38,7 @@
     char **parse_instructions_from_file(char const *filename);
     char **parse_instruction(char const *instruction);
 
-    bool instruction_is_correct(char **tokens);
+    bool instruction_is_correct(char const *instruction);
 
     int encode_to_file(char const *output_filename, char **instructions);
     int encode(int fd, char **instructions);
