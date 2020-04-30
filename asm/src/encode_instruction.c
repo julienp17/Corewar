@@ -18,10 +18,10 @@ ssize_t encode_instruction(int fd, char const *instruction, label_t **labels, ss
     char **tokens = NULL;
     ssize_t bytes_written = 0;
 
+    if (instruction_is_correct(instruction) == false)
+        return (-1);
     tokens = parse_instruction(instruction);
     if (tokens == NULL)
-        return (-1);
-    if (instruction_is_correct(tokens) == false)
         return (-1);
     if (my_str_ends_char(tokens[0], LABEL_CHAR))
         my_strarr_rotate(tokens, 0);
@@ -98,8 +98,7 @@ static ssize_t write_param_value(int fd, op_t op, char *arg, label_t **labels, s
                 if (my_strcmp(labels[i]->name, arg) == 0)
                     label = labels[i];
             if (label == NULL) {
-                my_puterr(arg);
-                my_puterr(" : unknown label.\n");
+                my_eprintf("%s : unknown label.\n", arg);
                 return (-1);
             }
             value = swap_int16(label->offset - current_offset);
