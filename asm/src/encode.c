@@ -56,7 +56,7 @@ int encode(int fd, char **instructions)
     }
     total_bytes_written = swap_int32(total_bytes_written);
     if (write(fd, &(total_bytes_written), sizeof(int)) < 0) {
-        perror("write");
+        my_puterr("Coudln't write program size.\n");
         return (EXIT_FAILURE);
     }
     return (EXIT_SUCCESS);
