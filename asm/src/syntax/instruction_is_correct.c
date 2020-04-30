@@ -12,26 +12,29 @@ static bool label_is_correct(char const *label_str);
 static bool arguments_are_correct(op_t op, char **args);
 static bool argument_is_correct(op_t op, char const *arg, uint i);
 
-bool instruction_is_correct(char **tokens)
+bool instruction_is_correct(char const *instruction)
 {
-    int i = 0;
     op_t op;
+    char **tokens = NULL;
 
+    tokens = parse_instruction(instruction);
+    if (tokens == NULL)
+        return (false);
     if (my_str_ends_char(tokens[0], LABEL_CHAR)) {
-        i++;
         if (label_is_correct(tokens[0]) == false)
             return (false);
+        my_strarr_rotate(tokens, 0);
+        if (tokens[0] == NULL)
+            return (true);
     }
-    if (tokens[i] == NULL)
-        return (true);
-    op = get_op_by_name(tokens[i]);
+    op = get_op_by_name(tokens[0]);
     if (op.mnemonique == 0) {
-        my_eprintf("%s : Invalid instruction.\n", tokens[i]);
+        my_eprintf("%s : Invalid instruction.\n", tokens[0]);
         return (false);
     }
-    i++;
-    if (arguments_are_correct(op, tokens + i) == false)
+    if (arguments_are_correct(op, tokens + 1) == false)
         return (false);
+    my_free_str_array(tokens);
     return (true);
 }
 
@@ -67,11 +70,9 @@ static bool arguments_are_correct(op_t op, char **args)
 
 static bool argument_is_correct(op_t op, char const *arg, uint i)
 {
-    char *cmd = NULL;
     int arg_type = 0;
     int value = 0;
 
-    cmd = op.mnemonique;
     arg_type = get_argument_type(arg);
     if (arg_type == T_REG) {
         value = my_atoi(arg + 1);
@@ -81,7 +82,7 @@ static bool argument_is_correct(op_t op, char const *arg, uint i)
         }
     }
     if ((arg_type & op.type[i]) == 0) {
-        my_eprintf("%s : Invalid argument type for '%s'\n", arg, cmd);
+        my_eprintf("%s : Invalid argument type for '%s'\n", arg, op.mnemonique);
         return (false);
     }
     return (true);
