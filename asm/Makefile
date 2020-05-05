@@ -27,6 +27,11 @@ SRC_F		=	assemble.c \
 				file_control/get_file_lines.c \
 				file_control/get_file_size.c \
 				file_control/get_pretty_filename.c \
+				structures/asm/asm_create.c \
+				structures/asm/asm_destroy.c \
+				structures/asm/asm_fill.c \
+				structures/asm/asm_write.c \
+				structures/asm/asm_puterr.c \
 				structures/label/label_create.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
