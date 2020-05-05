@@ -19,7 +19,7 @@ ssize_t get_file_size(char const *filename)
 
     fd = open(filename, O_RDONLY);
     if (fd < 0) {
-        my_puterr("Coudln't open file.\n");
+        my_puterr("Can't open file.\n");
         return (-1);
     }
     while (read_size > 0) {
@@ -27,7 +27,7 @@ ssize_t get_file_size(char const *filename)
         file_size += read_size;
     }
     if (close(fd) < 0) {
-        my_puterr("Coudln't open file.\n");
+        my_puterr("Can't open file.\n");
         return (-1);
     }
     return (file_size);
