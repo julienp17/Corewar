@@ -44,7 +44,9 @@
     void asm_destroy(asm_t *assembler);
 
     int asm_fill(asm_t *assembler);
-    int asm_fill_header(asm_t *as);
+    int asm_fill_header(asm_t *asb);
+
+    void asm_advance_empty(asm_t *asb);
 
     int asm_write(asm_t *assembler);
     void asm_puterr(asm_t *assembler, char const *error_str);
