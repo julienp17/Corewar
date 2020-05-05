@@ -8,18 +8,18 @@
 #include "asm.h"
 #include "my.h"
 
-static bool label_is_correct(char const *label_str);
-static bool arguments_are_correct(op_t op, char **args);
-static bool argument_is_correct(op_t op, char const *arg, uint i);
+static bool label_is_correct(asm_t *asb, char const *label_str);
+static bool arguments_are_correct(asm_t *asb, op_t op, char **args);
+static bool argument_is_correct(asm_t *asb, op_t op, char const *arg, uint i);
 
-bool instruction_is_correct(char const *instruction)
+bool instruction_is_correct(asm_t *asb, char const *instruction)
 {
     op_t op;
     char **tokens = NULL;
 
     tokens = parse_instruction(instruction);
     if (my_str_ends_char(tokens[0], LABEL_CHAR)) {
-        if (label_is_correct(tokens[0]) == false)
+        if (label_is_correct(asb, tokens[0]) == false)
             return (false);
         my_strarr_rotate(tokens, 0);
         if (tokens[0] == NULL)
@@ -27,46 +27,43 @@ bool instruction_is_correct(char const *instruction)
     }
     op = op_get_by_name(tokens[0]);
     if (op.mnemonique == 0) {
-        my_eprintf("%s : Invalid instruction.\n", tokens[0]);
+        asm_puterr(asb, "Invalid instruction");
         return (false);
     }
-    if (arguments_are_correct(op, tokens + 1) == false)
+    if (arguments_are_correct(asb, op, tokens + 1) == false)
         return (false);
     my_free_str_array(tokens);
     return (true);
 }
 
-static bool label_is_correct(char const *label)
+static bool label_is_correct(asm_t *asb, char const *label)
 {
     if (label[0] == LABEL_CHAR) {
-        my_puterr("Label can't be empty\n");
+        asm_puterr(asb, "Empty label");
         return (false);
     }
     for (uint i = 0 ; label[i] != LABEL_CHAR && label[i] ; i++) {
         if (my_str_contains_char(LABEL_CHARS, label[i]) == false) {
-            my_eprintf("%s : Invalid label name\n", label);
+            asm_puterr(asb, "Invalid label name");
             return (false);
         }
     }
     return (true);
 }
 
-static bool arguments_are_correct(op_t op, char **args)
+static bool arguments_are_correct(asm_t *asb, op_t op, char **args)
 {
-    char *cmd = NULL;
-
-    cmd = op.mnemonique;
     if (my_strarr_len(args) != (unsigned int)(op.nbr_args)) {
-        my_eprintf("Invalid number of arguments for '%s' instruction.\n", cmd);
+        asm_puterr(asb, "Too many arguments given to the instruction");
         return (false);
     }
     for (uint i = 0 ; args[i] ; i++)
-        if (argument_is_correct(op, args[i], i) == false)
+        if (argument_is_correct(asb, op, args[i], i) == false)
             return (false);
     return (true);
 }
 
-static bool argument_is_correct(op_t op, char const *arg, uint i)
+static bool argument_is_correct(asm_t *asb, op_t op, char const *arg, uint i)
 {
     int arg_type = 0;
     int value = 0;
@@ -75,12 +72,12 @@ static bool argument_is_correct(op_t op, char const *arg, uint i)
     if (arg_type == T_REG) {
         value = my_atoi(arg + 1);
         if (value < 1 || value > REG_NUMBER) {
-            my_eprintf("%s : Invalid register value.\n", arg);
+            asm_puterr(asb, "Invalid register number");
             return (false);
         }
     }
     if ((arg_type & op.type[i]) == 0) {
-        my_eprintf("%s : Invalid argument type for '%s'\n", arg, op.mnemonique);
+        asm_puterr(asb, "The argument given to the instruction is invalid");
         return (false);
     }
     return (true);
