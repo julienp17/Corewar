@@ -21,5 +21,6 @@ int assemble(char const *filename)
     if (status == EXIT_FAILURE)
         return (EXIT_FAILURE);
     status = asm_write(assembler);
+    asm_destroy(assembler);
     return (status);
 }
