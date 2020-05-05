@@ -123,7 +123,7 @@ static int16_t instruction_get_offset(char const *instruction)
     if (op.mnemonique == 0)
         return (-1);
     offset += sizeof(char);
-    offset += (op.nbr_args != 1 || op.type[0] != T_DIR);
+    offset += (should_write_coding_byte(op));
     for (uint i = 1 ; tokens[i] ; i++) {
         arg_size = get_argument_size(op, tokens[i]);
         total_args_size += arg_size;

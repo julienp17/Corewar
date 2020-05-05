@@ -39,6 +39,7 @@
     char **parse_instruction(char const *instruction);
 
     bool instruction_is_correct(char const *instruction);
+    bool should_write_coding_byte(op_t op);
 
     int encode_to_file(char const *output_filename, char **instructions);
     int encode(int fd, char **instructions);

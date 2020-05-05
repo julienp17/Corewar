@@ -45,7 +45,7 @@ static ssize_t write_instruction(int fd, char **tokens, label_t **labels, ssize_
         return (-1);
     }
     total_bytes_written += bytes_written;
-    if (op.nbr_args != 1 || op.type[0] != T_DIR) {
+    if (should_write_coding_byte(op)) {
         bytes_written = write_coding_byte(fd, op.nbr_args, tokens + 1);
         if (bytes_written < 0)
             return (-1);
