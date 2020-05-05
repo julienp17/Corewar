@@ -18,13 +18,13 @@ int asm_fill_instructions_meta(asm_t *asb)
     if (allocate_instructions(asb) == EXIT_FAILURE)
         return (EXIT_FAILURE);
     asb->nb_instructions = 0;
-    for (int i = 0 ; asb->lines[i] ; i++) {
-        if (is_not_instruction(asb->lines[i]))
+    for (asb->line = 0 ; asb->lines[asb->line] ; asb->line++) {
+        if (is_not_instruction(asb->lines[asb->line]))
             continue;
-        if (instruction_is_correct(asb->lines[i]) == false)
+        if (instruction_is_correct(asb, asb->lines[asb->line]) == false)
             return (EXIT_FAILURE);
         instruction = &(asb->instructions[asb->nb_instructions]);
-        (*instruction) = instruction_create(asb->lines[i]);
+        (*instruction) = instruction_create(asb->lines[asb->line]);
         (*instruction)->offset = asb->header.prog_size;
         asb->header.prog_size += (*instruction)->size;
         asb->nb_instructions++;
@@ -46,9 +46,8 @@ static int allocate_instructions(asm_t *asb)
     int len = 0;
 
     for (int i = 0 ; asb->lines[i] ; i++)
-        if (is_not_instruction(asb->lines[i]))
-            asb->nb_instructions++;
-    len = asb->nb_instructions;
+        if (is_not_instruction(asb->lines[i]) == false)
+            len++;
     asb->instructions = malloc(sizeof(instruction_t *) * (len + 1));
     if (asb->instructions == NULL) {
         my_puterr("Couldn't allocate memory for instructions.\n");
