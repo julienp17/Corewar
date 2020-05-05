@@ -5,32 +5,32 @@
 ** main
 */
 
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "file_control.h"
 #include "op.h"
-
-void pars_data(char **av)
-{
-    int fd = 0;
-    void *buffer = NULL;
-
-    buffer = malloc(sizeof(int));
-    fd = open(av[1], O_RDONLY);
-
-    while (read(fd, buffer, sizeof(int))) {
-        printf("%x ", *(int *)buffer);
-    }
-}
 
 int main(int ac, char **av)
 {
-    if (ac < 2)
-        return (84);
+    buffer_t buf;
+    int offset = 0;
+    int offsets[] = {
+        sizeof(int), sizeof(char) * PROG_NAME_LENGTH,
+        sizeof(int), sizeof(int), sizeof(char) * COMMENT_LENGTH, sizeof(int),
+        sizeof(char), 0
+    };
 
-    pars_data(av);
+    if (ac != 2) {
+        return (1);
+    }
+    if (buffer_fill_from_file(av[1], &buf) == EXIT_FAILURE)
+        return (1);
+    for (int i = 0 ; offsets[i] != 0 ; i++) {
+        if (offsets[i] == sizeof(int))
+            printf("%x\n", *(int *)(buf.buf + offset));
+        else
+            printf("%s\n", (char *)(buf.buf + offset));
+        offset += offsets[i];
+    }
     return (0);
 }
