@@ -20,7 +20,7 @@ int assemble(char const *filename)
     status = asm_fill(assembler);
     if (status == EXIT_FAILURE)
         return (EXIT_FAILURE);
-    status = asm_write(assembler);
+    status = asm_encode(assembler);
     asm_destroy(assembler);
     return (status);
 }
