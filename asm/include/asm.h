@@ -17,6 +17,7 @@
     #include <sys/types.h>
     #include "op.h"
     #include "label.h"
+    #include "instruction.h"
 
     #define ASM_HELP   \
     "USAGE\n"                                                                  \
@@ -38,36 +39,39 @@
         char **lines;
         int line;
         header_t header;
+        instruction_t **instructions;
+        uint nb_instructions;
     } asm_t;
 
     asm_t *asm_create(char const *filename);
     void asm_destroy(asm_t *assembler);
 
+    int assemble(char const *filename);
+    bool asm_has_an_instruction(asm_t *asb);
+
     int asm_fill(asm_t *assembler);
-    int asm_fill_header(asm_t *asb);
+    int asm_fill_program_name(asm_t *asb, char const *line);
+    int asm_fill_comment(asm_t *asb, char const *line);
+    int asm_fill_instructions_meta(asm_t *asb);
+    int asm_fill_instruction_value(asm_t *asb, char const *line);
 
-    void asm_advance_empty(asm_t *asb);
-
-    int asm_write(asm_t *assembler);
+    int asm_encode(asm_t *assembler);
+    int asm_encode_header(int fd, header_t *header);
     void asm_puterr(asm_t *assembler, char const *error_str);
 
-    int assemble(char const *filename);
 
     char **parse_instructions_from_file(char const *filename);
     char **parse_instruction(char const *instruction);
 
     bool instruction_is_correct(char const *instruction);
-    bool should_write_coding_byte(op_t op);
+    bool op_has_coding_byte(op_t op);
 
-    int encode_to_file(char const *output_filename, char **instructions);
-    int encode(int fd, char **instructions);
-    int encode_header(int fd, char **instructions);
-    ssize_t encode_instruction(int fd, char const *instruction, label_t **labels, ssize_t current_offset);
-
-    bool arg_is_index(op_t op);
-    op_t get_op_by_name(char const *name);
-    int get_argument_type(char const *arg);
-    int get_argument_size(op_t op, char const *arg);
+    op_t op_get_by_name(char const *name);
+    bool argument_is_index(op_t op);
+    int argument_get_type(char const *arg);
+    int argument_get_size(char const *arg, op_t op);
+    int argument_get_value(char const *arg, instruction_t *instruction,
+                                        instruction_t **instructions);
     int16_t swap_int16(int16_t val);
     int32_t swap_int32(int32_t val);
 #endif
