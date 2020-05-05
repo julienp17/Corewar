@@ -12,6 +12,10 @@ int asm_fill(asm_t *assembler)
 {
     int status = 0;
 
-    my_strarr_put(assembler->file_lines);
+    status = asm_fill_header(assembler);
+    if (status == EXIT_FAILURE)
+        return (EXIT_FAILURE);
+    // my_strarr_put(assembler->lines);
+    // asm_puterr(assembler, "no errors");
     return (status);
 }

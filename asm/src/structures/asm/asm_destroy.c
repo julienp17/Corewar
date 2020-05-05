@@ -11,6 +11,6 @@
 void asm_destroy(asm_t *assembler)
 {
     free(assembler->input_filename);
-    my_free_str_array(assembler->file_lines);
+    my_free_str_array(assembler->lines);
     free(assembler);
 }
