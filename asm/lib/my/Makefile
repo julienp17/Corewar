@@ -38,6 +38,7 @@ SRC_F 		=	my_atoi.c \
 				my_str_to_lower.c \
 				my_str_to_word_array.c \
 				my_strarr_len.c \
+				my_strarr_put.c \
 				my_strarr_remove_empty.c \
 				my_strarr_rotate.c \
 				my_strcat.c \

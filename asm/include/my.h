@@ -84,6 +84,7 @@
     void my_putchar(char my_char);
     void my_putstr(char const *str);
     void my_puterr(char const *str);
+    void my_strarr_put(char **arr);
     void my_str_rotate(char *str, int index);
     void my_strarr_rotate(char **arr, int index);
     void my_strarr_remove_empty(char **arr);
