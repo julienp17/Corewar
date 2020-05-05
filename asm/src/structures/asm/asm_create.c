@@ -9,6 +9,8 @@
 #include "asm.h"
 #include "my.h"
 
+static header_t header_create(void);
+
 asm_t *asm_create(char const *filename)
 {
     asm_t *assembler = NULL;
@@ -20,6 +22,18 @@ asm_t *asm_create(char const *filename)
     }
     assembler->input_filename = my_strdup(filename);
     assembler->file_lines = parse_instructions_from_file(filename);
+    assembler->header = header_create();
     assembler->line = 0;
     return (assembler);
+}
+
+static header_t header_create(void)
+{
+    header_t header;
+
+    header.magic = 0;
+    my_strcpy(header.prog_name, "");
+    header.prog_size = 0;
+    my_strcpy(header.comment, "");
+    return (header);
 }
