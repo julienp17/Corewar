@@ -23,7 +23,6 @@ char **parse_instructions_from_file(char const *filename)
             instructions[i][comment_index] = '\0';
         instructions[i] = my_clean_str(instructions[i]);
     }
-    my_strarr_remove_empty(instructions);
     return (instructions);
 }
 
