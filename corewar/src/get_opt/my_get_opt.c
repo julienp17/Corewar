@@ -15,7 +15,7 @@ void elem_add(prog_info_t **add, char **av, int i)
     (*add)->prog_name = my_strdup(av[i]);   
 
     if (av[i + 2] != NULL && my_strcmp(av[i + 1], "-a") == 0) {
-        (*add)->load_address = my_atoi(av[i + 1]);
+        (*add)->load_address = my_atoi(av[i + 2]);
     }
 }
 
