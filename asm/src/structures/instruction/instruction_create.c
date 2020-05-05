@@ -25,6 +25,8 @@ instruction_t *instruction_create(char const *line)
     instruction->label = NULL;
     tokens = parse_instruction(line);
     fill_instruction(instruction, tokens);
+    for (int i = 0 ; i < MAX_ARGS_NUMBER ; i++)
+        instruction->args[i] = (arg_t) {0, 0, 0};
     instruction->size = instruction_get_size(line);
     instruction->offset = 0;
     my_free_str_array(tokens);
