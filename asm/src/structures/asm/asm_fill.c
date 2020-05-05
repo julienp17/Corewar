@@ -18,7 +18,7 @@ int asm_fill(asm_t *asb)
     if (asm_fill_instructions_meta(asb) == EXIT_FAILURE)
         return (EXIT_FAILURE);
     asb->nb_instructions = 0;
-    for (; status == EXIT_SUCCESS && asb->lines[asb->line] ; asb->line++) {
+    for (asb->line=0; status==EXIT_SUCCESS&& asb->lines[asb->line];asb->line++){
         line = asb->lines[asb->line];
         if (my_str_is_empty(line))
             continue;
@@ -37,8 +37,6 @@ int asm_fill(asm_t *asb)
 
 static bool header_is_empty(asm_t *asb)
 {
-    bool is_empty = false;
-
     if (my_str_is_empty(asb->header.comment)) {
         asb->line = 0;
         asm_puterr(asb, "Warning : No comment specified");
@@ -46,7 +44,7 @@ static bool header_is_empty(asm_t *asb)
     if (my_str_is_empty(asb->header.prog_name)) {
         asb->line = 0;
         asm_puterr(asb, "No name specified");
-        is_empty = true;
+        return (true);
     }
-    return (is_empty);
+    return (false);
 }
