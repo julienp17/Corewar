@@ -59,19 +59,21 @@
     int asm_encode_header(int fd, header_t *header);
     void asm_puterr(asm_t *assembler, char const *error_str);
 
+    op_t op_get_by_name(char const *name);
+    bool op_has_coding_byte(op_t op);
 
     char **parse_instructions_from_file(char const *filename);
     char **parse_instruction(char const *instruction);
+    bool instruction_is_correct(asm_t *asb, char const *instruction);
+    int16_t instruction_get_size(char const *instruction);
+    uchar instruction_get_coding_byte(char **args);
 
-    bool instruction_is_correct(char const *instruction);
-    bool op_has_coding_byte(op_t op);
-
-    op_t op_get_by_name(char const *name);
     bool argument_is_index(op_t op);
     int argument_get_type(char const *arg);
     int argument_get_size(char const *arg, op_t op);
     int argument_get_value(char const *arg, instruction_t *instruction,
                                         instruction_t **instructions);
+
     int16_t swap_int16(int16_t val);
     int32_t swap_int32(int32_t val);
 #endif

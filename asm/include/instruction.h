@@ -33,8 +33,5 @@
     void instruction_destroy(instruction_t *instruction);
 
     ssize_t instruction_write(instruction_t *instruction, int fd);
-    bool instruction_is_correct(char const *instruction);
     bool instruction_is_label(instruction_t const *instruction);
-    int16_t instruction_get_size(char const *instruction);
-    uchar instruction_get_coding_byte(char **args);
 #endif
