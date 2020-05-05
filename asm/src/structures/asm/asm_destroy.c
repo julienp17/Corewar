@@ -12,5 +12,7 @@ void asm_destroy(asm_t *assembler)
 {
     free(assembler->input_filename);
     my_free_str_array(assembler->lines);
+    for (uint i = 0 ; assembler->instructions[i] ; i++)
+        instruction_destroy(assembler->instructions[i]);
     free(assembler);
 }

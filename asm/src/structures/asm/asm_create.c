@@ -24,6 +24,8 @@ asm_t *asm_create(char const *filename)
     assembler->lines = parse_instructions_from_file(filename);
     assembler->header = header_create();
     assembler->line = 0;
+    assembler->nb_instructions = 0;
+    assembler->instructions = NULL;
     return (assembler);
 }
 
@@ -31,9 +33,11 @@ static header_t header_create(void)
 {
     header_t header;
 
-    header.magic = COREWAR_EXEC_MAGIC;
-    my_strcpy(header.prog_name, "");
+    header.magic = swap_int32(COREWAR_EXEC_MAGIC);
+    for (int i = 0 ; i < PROG_NAME_LENGTH ; i++)
+        header.prog_name[i] = 0;
     header.prog_size = 0;
-    my_strcpy(header.comment, "");
+    for (int i = 0 ; i < COMMENT_LENGTH ; i++)
+        header.comment[i] = 0;
     return (header);
 }
