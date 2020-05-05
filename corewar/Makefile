@@ -18,8 +18,8 @@ SRC_D		=	src/
 SRC_F		=	fill_buffer.c \
 				get_opt/my_get_opt.c \
 				get_file_size.c \
-				read_files.c \
-				get_header.c \
+				get_files/read_files.c \
+				get_files/get_header.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)

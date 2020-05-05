@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "file_control.h": "c",
+        "file_informations.h": "c",
+        "my.h": "c"
+    }
+}
