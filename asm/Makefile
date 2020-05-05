@@ -20,6 +20,7 @@ SRC_F		=	assemble.c \
 				encode_instruction.c \
 				encode_header.c \
 				swap_endianess.c \
+				should_write_coding_byte.c \
 				parsing/parse_instruction.c \
 				syntax/instruction_is_correct.c \
 				file_control/get_file_buffer.c \
