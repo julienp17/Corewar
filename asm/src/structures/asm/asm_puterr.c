@@ -12,7 +12,7 @@ void asm_puterr(asm_t *assembler, char const *error_str)
 {
     my_eprintf("asm, %s, line %d: %s.\n",
         assembler->input_filename,
-        assembler->line,
+        assembler->line + 1,
         error_str
     );
 }
