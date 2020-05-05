@@ -45,6 +45,11 @@ op_t get_op_by_name(char const *name)
     return (op_tab[i]);
 }
 
+bool op_has_coding_byte(op_t op)
+{
+    return (op.nbr_args != 1 || op.type[0] != T_DIR);
+}
+
 int get_argument_type(char const *arg)
 {
     if (arg[0] == REGISTER_CHAR)
@@ -58,7 +63,7 @@ int get_argument_type(char const *arg)
     return (0);
 }
 
-int get_argument_size(op_t op, char const *arg)
+int get_argument_size(char const *arg, op_t op)
 {
     int arg_type = 0;
 
@@ -70,4 +75,46 @@ int get_argument_size(op_t op, char const *arg)
     if (arg_type == T_DIR)
         return (arg_is_index(op) ? IND_SIZE : DIR_SIZE);
     return (-1);
+}
+
+int get_argument_value(char *arg, instruction_t *instruction, instruction_t **instructions)
+{
+    int arg_type = 0;
+    int value = 0;
+    instruction_t *label = NULL;
+
+    arg_type = get_argument_type(arg);
+    if (arg_type == T_REG) {
+        value = (char)my_atoi(arg + 1);
+    } else if (arg_type == T_IND || arg_type == T_LAB) {
+        if (arg_type == T_IND) {
+            value = (short int)my_atoi(arg);
+            value = (short int)swap_int16(value);
+        } else {
+            my_str_rotate(arg, 0);
+            for (uint i = 0 ; instructions[i] && label == NULL ; i++)
+                if (instructions[i]->label && my_strcmp(instructions[i]->label, arg) == 0)
+                    label = instructions[i];
+            if (label == NULL) {
+                my_eprintf("%s : unknown label.\n", arg);
+                return (-1);
+            }
+            value = swap_int16(label->offset - instruction->offset);
+        }
+    } else if (arg_type == T_DIR) {
+        if (arg_is_index(instruction->op))
+            return (get_argument_value(arg + 1, instruction, instructions));
+        value = my_atoi(arg + 1);
+        value = swap_int32(value);
+    }
+    return (value);
+}
+
+bool arg_is_index(op_t op)
+{
+    return (
+        my_str_contains(op.comment, "index")
+        || (op.nbr_args == 1 && op.type[0] == T_DIR
+            && my_strcmp(op.mnemonique, "live") != 0)
+    );
 }
