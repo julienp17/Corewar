@@ -33,6 +33,19 @@
 
     typedef unsigned int uint;
 
+    typedef struct assembler {
+        char *input_filename;
+        char **file_lines;
+        int line;
+        header_t header;
+    } asm_t;
+
+    asm_t *asm_create(char const *filename);
+    void asm_destroy(asm_t *assembler);
+    int asm_fill(asm_t *assembler);
+    int asm_write(asm_t *assembler);
+    void asm_puterr(asm_t *assembler, char const *error_str);
+
     int assemble(char const *filename);
 
     char **parse_instructions_from_file(char const *filename);
