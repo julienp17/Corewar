@@ -10,14 +10,8 @@
 #include "my.h"
 #include "file_informations.h"
 
-void error_name(prog_info_t *info)
-{
-    if (info->prog_name > 4 || info->prog_name < 1 ) {
-        printf("-n argument %d is invalid.\n", info->prog_name);
-        printf("Enter a number between 1 and 4.\n");
-        exit(1);
-    }
-}
+void error_name(prog_info_t *info);
+void err_address(int nb);
 
 int elem_add_n(prog_info_t **add, char **av, int i)
 {
@@ -42,9 +36,10 @@ int elem_add_n(prog_info_t **add, char **av, int i)
 
 int elem_add_a(prog_info_t **add, char **av, int i)
 {
-    if ((!my_strcmp("-a", av[i]))) { //-a argument -1 is invalid. Enter a valid memory offset.
+    if ((!my_strcmp("-a", av[i]))) {
         i += 1;
         (*add)->load_address = my_atoi(av[i]);
+        err_address((*add)->load_address);
         i += 1;
         if ((!my_strcmp("-n", av[i]))) {
             i++;
@@ -71,4 +66,23 @@ int elem_add_std(prog_info_t **add, char **av, int i)
         exit (INVALID_OPTION);
 
     return (i);
+}
+
+void error_name(prog_info_t *info)
+{
+    if (info->prog_name > 4 || info->prog_name < 1 ) {
+        printf("-n argument %d is invalid.\n", info->prog_name);
+        printf("Enter a number between 1 and 4.\n");
+        exit(1);
+    }
+}
+
+void err_address(int nb)
+{
+    if (nb < 0) {
+        printf("-a argument %d is invalid.\n", nb);
+        printf("Enter a valid memory offset.\n");
+        exit(1);
+    }
+
 }
