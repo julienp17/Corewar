@@ -30,5 +30,6 @@ typedef struct s_my_get_opt {
 header_t get_header(int fd);
 void read_files(prog_info_t *filepaths, int nb_prog);
 my_get_opt_t *my_get_opt(char **av);
+prog_info_t *free_list(prog_info_t *list);
 
 #endif /* !FILE_INFO_H_ */
