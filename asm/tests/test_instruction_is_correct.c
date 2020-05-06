@@ -195,3 +195,20 @@ Test(instruction_is_correct, too_much_reg_number, .init=cr_redirect_stderr)
     cr_assert_eq(actual, expected);
     cr_assert_stderr_eq_str(expected_str);
 }
+
+Test(instruction_is_correct, incorrect_sep, .init=cr_redirect_stderr)
+{
+    char const instruction[] = "ld %-1; r3";
+    char const expected_str[] = \
+        "\e[1masm, test, line 4: \e[91mThe argument given to the " \
+        "instruction is invalid.\e[0m\n";
+    bool expected = false;
+    bool actual = false;
+    asm_t asb;
+
+    asb.input_filename = "test";
+    asb.line = 3;
+    actual = instruction_is_correct(&asb, instruction);
+    cr_assert_eq(actual, expected);
+    cr_assert_stderr_eq_str(expected_str);
+}
