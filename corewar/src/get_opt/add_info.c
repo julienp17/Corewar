@@ -22,7 +22,7 @@ void error_name(prog_info_t *info)
 int elem_add_n(prog_info_t **add, char **av, int i)
 {
     if ((!my_strcmp("-n", av[i]))) {
-        // (*add)->load_address = -1;
+        (*add)->load_address = -1;
         i += 1;
         (*add)->prog_name = my_atoi(av[i]);
         error_name((*add));
@@ -44,7 +44,7 @@ int elem_add_a(prog_info_t **add, char **av, int i)
 {
     if ((!my_strcmp("-a", av[i]))) { //-a argument -1 is invalid. Enter a valid memory offset.
         i += 1;
-        // (*add)->load_address = my_atoi(av[i]);
+        (*add)->load_address = my_atoi(av[i]);
         i += 1;
         if ((!my_strcmp("-n", av[i]))) {
             i++;
