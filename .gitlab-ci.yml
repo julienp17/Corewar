@@ -10,3 +10,14 @@ unit_tests:
   script:
     - make tests_run
     - gcovr -e tests/
+
+hexdump_diff:
+  allow_failure: true
+  script:
+    - cd asm/
+    - make
+    - ./hexdump_diff.sh reference/src/abel.s
+    - ./hexdump_diff.sh reference/src/bill.s
+    - ./hexdump_diff.sh reference/src/pdd.s
+    - ./hexdump_diff.sh reference/src/test.s
+    - ./hexdump_diff.sh reference/src/tyron.s
