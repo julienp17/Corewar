@@ -69,16 +69,16 @@ static bool argument_is_correct(asm_t *asb, op_t op, char const *arg, uint i)
     int value = 0;
 
     arg_type = argument_get_type(arg);
+    if (arg_type == 0 || (arg_type & op.type[i]) == 0) {
+        asm_puterr(asb, "The argument given to the instruction is invalid");
+        return (false);
+    }
     if (arg_type == T_REG) {
         value = my_atoi(arg + 1);
         if (value < 1 || value > REG_NUMBER) {
             asm_puterr(asb, "Invalid register number");
             return (false);
         }
-    }
-    if ((arg_type & op.type[i]) == 0) {
-        asm_puterr(asb, "The argument given to the instruction is invalid");
-        return (false);
     }
     return (true);
 }
