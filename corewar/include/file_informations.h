@@ -10,6 +10,12 @@
 #ifndef FILE_INFO_H_
 #define FILE_INFO_H_
 
+enum error_arg {
+    INVALID_OPTION,
+    INVALID_NB_CHAMP,
+    NO_CAMP_SPECI
+};
+
 typedef struct s_files_info {
     header_t header;
     //prog var

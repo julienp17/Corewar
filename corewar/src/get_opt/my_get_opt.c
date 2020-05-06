@@ -10,17 +10,29 @@
 #include "file_informations.h"
 #include "my.h"
 
-void elem_add(prog_info_t **add, char **av, int i)
+void display_prog(my_get_opt_t *opt);
+
+int elem_add(prog_info_t **add, char **av, int i)
 {
-    (*add)->file_path = my_strdup(av[i]);
+    int pos = i;
 
-    if (av[i + 1] != NULL && my_strcmp(av[i + 1], "-a") == 0) {
-        if (av[i + 2] != NULL)
-            (*add)->load_address = my_atoi(av[i + 2]);
+    (*add)->load_address = -1;
+    if ((!my_strcmp("-n", av[pos]))) {
+        pos += 1;
+        (*add)->prog_name = my_atoi(av[pos]);
+        pos += 1;
+        if (av[pos] != NULL && (!my_strcmp("-a", av[pos]))) {
+            pos++;
+            (*add)->load_address = my_atoi(av[pos]);
+            pos++;
+        }
+        if (av[pos] != NULL)
+            (*add)->file_path = my_strdup(av[pos]);
+        else {
+            return (INVALID_OPTION);
+        }
     }
-    else
-        (*add)->load_address = -1;
-
+    return (0);
 }
 
 void add_prog_infos(char **av, int i , my_get_opt_t *opt)
@@ -54,9 +66,20 @@ my_get_opt_t *my_get_opt(char **av)
             i++;
         }
         if ((!my_strcmp("-n", av[i]))) {
-            i++;
             add_prog_infos(av, i, opt);
         }
     }
+    display_prog(opt);
     return (opt);
+}
+
+void display_prog(my_get_opt_t *opt)
+{
+    while (opt->prog) {
+        printf("opt->prog->prog_name = [%d]\n", opt->prog->prog_name);
+        printf("opt->prog->load_address = [%d]\n", opt->prog->load_address);
+        printf("opt->prog->file_path = [%s]\n\n\n\n", opt->prog->file_path);
+        opt->prog = opt->prog->next;
+    }
+
 }
