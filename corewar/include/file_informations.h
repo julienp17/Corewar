@@ -11,11 +11,16 @@
 #define FILE_INFO_H_
 
 enum error_arg {
-    INVALID_OPTION,
-    INVALID_NB_CHAMP,
-    NO_CAMP_SPECI
+    INVALID_OPTION = -1,
+    INVALID_NB_CHAMP = -2,
+    NO_CAMP_SPECI = -3
 };
 
+enum data_type {
+    PROG_NB,
+    LOAD_ADDRESS,
+    PROG_NAME
+};
 typedef struct s_files_info {
     header_t header;
     //prog var
@@ -37,5 +42,8 @@ header_t get_header(int fd);
 void read_files(prog_info_t *filepaths, int nb_prog);
 my_get_opt_t *my_get_opt(char **av);
 prog_info_t *free_list(prog_info_t *list);
-
+int add_prog_infos(char **av, int i , my_get_opt_t *opt);
+int elem_add_n(prog_info_t **add, char **av, int i);
+int elem_add_a(prog_info_t **add, char **av, int i);
+int elem_add_std(prog_info_t **add, char **av, int i);
 #endif /* !FILE_INFO_H_ */

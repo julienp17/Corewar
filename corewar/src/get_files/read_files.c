@@ -17,7 +17,7 @@
 
 static int open_file(char *fp);
 
-    void read_files(prog_info_t *filepaths, int nb_prog)
+void read_files(prog_info_t *filepaths, int nb_prog)
 {
     int fd = 0;
     files_inf_t **files = malloc(sizeof(files_inf_t) * nb_prog + 1);
