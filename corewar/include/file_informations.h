@@ -16,7 +16,8 @@ typedef struct s_files_info {
 }files_inf_t;
 
 typedef struct s_prog_info {
-    char *prog_name;
+    int prog_name;
+    char *file_path;
     int load_address;
     struct s_prog_info *next;
 }prog_info_t;

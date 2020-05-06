@@ -12,7 +12,7 @@
 
 void elem_add(prog_info_t **add, char **av, int i)
 {
-    (*add)->prog_name = my_strdup(av[i]);
+    (*add)->file_path = my_strdup(av[i]);
 
     if (av[i + 1] != NULL && my_strcmp(av[i + 1], "-a") == 0) {
         if (av[i + 2] != NULL)
