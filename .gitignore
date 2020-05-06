@@ -4,3 +4,4 @@ unit_tests
 *.gc*
 lib/libmy.a
 lib/my/libmy.a
+*.vscode/*
