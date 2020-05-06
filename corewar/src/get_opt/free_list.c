@@ -5,7 +5,7 @@
 ** free_list
 */
 
-#include <stddef.h>
+#include <stdlib.h>
 #include "file_informations.h"
 
 prog_info_t *free_list(prog_info_t *list)

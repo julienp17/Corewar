@@ -70,6 +70,7 @@ my_get_opt_t *my_get_opt(char **av)
         }
     }
     display_prog(opt);
+    free_list(opt->prog);
     return (opt);
 }
 
@@ -81,5 +82,4 @@ void display_prog(my_get_opt_t *opt)
         printf("opt->prog->file_path = [%s]\n\n\n\n", opt->prog->file_path);
         opt->prog = opt->prog->next;
     }
-
 }

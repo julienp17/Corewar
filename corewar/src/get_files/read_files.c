@@ -25,7 +25,7 @@ static int open_file(char *fp);
 
     files[nb_prog] = NULL;
     for (int i = 0; tmp; i++) {
-        fd = open_file(tmp->prog_name);
+        fd = open_file(tmp->file_path);
         files[i]->header = get_header(fd);
         close(fd);
         tmp = tmp->next;
