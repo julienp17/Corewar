@@ -1,7 +1,10 @@
 unit_tests
 *.o
 *.vgcore
+*.vscode*
 *.gc*
-lib/libmy.a
-lib/my/libmy.a
-*.vscode/*
+*libmy.a*
+asm/asm
+corewar/corewar
+asm/reference/*
+corewar/reference/*

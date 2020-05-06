@@ -5,7 +5,9 @@
 ** op
 */
 
+#include "asm.h"
 #include "op.h"
+#include "my.h"
 
 op_t op_tab[] = {
     {"live", 1, {T_DIR}, 1, 10, "alive"},
@@ -32,3 +34,18 @@ op_t op_tab[] = {
     {"aff", 1, {T_REG}, 16, 2, "aff"},
     {0, 0, {0}, 0, 0, 0}
 };
+
+op_t op_get_by_name(char const *name)
+{
+    unsigned int i = 0;
+
+    for (i = 0 ; op_tab[i].mnemonique != 0 ; i++)
+        if (my_strcmp(op_tab[i].mnemonique, name) == 0)
+            return (op_tab[i]);
+    return (op_tab[i]);
+}
+
+bool op_has_coding_byte(op_t op)
+{
+    return (op.nbr_args != 1 || op.type[0] != T_DIR);
+}
