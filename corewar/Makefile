@@ -16,6 +16,7 @@ OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
 
 SRC_F		=	fill_buffer.c \
+				op.c \
 				get_opt/my_get_opt.c \
 				get_opt/free_list.c \
 				get_opt/add_info.c 	\
@@ -23,6 +24,7 @@ SRC_F		=	fill_buffer.c \
 				get_file_size.c \
 				get_files/read_files.c \
 				get_files/get_header.c \
+				get_files/get_prog.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)
