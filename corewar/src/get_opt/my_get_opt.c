@@ -16,12 +16,15 @@ int add_prog_infos(char **av, int i , my_get_opt_t *opt)
 {
     prog_info_t *tmp = NULL;
     prog_info_t *add = NULL;
-
+    int reference = i;
     add = malloc(sizeof(prog_info_t));
     tmp = opt->prog;
+
+
     i = elem_add_n(&add, av, i);
-    i = elem_add_a(&add, av, i);
-    i = elem_add_std(&add, av, i);
+    i = elem_add_a(&add, av, i, opt);
+    i = elem_add_std(&add, av, i, opt);
+
     if (tmp == NULL) {
         opt->prog = add;
         return (i);
