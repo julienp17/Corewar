@@ -18,7 +18,7 @@ int add_elements(prog_info_t *add, int i, char **av, get_opt_t *opt)
         i = elem_add_a(add, av, i, opt);
     }
     else if (av[i] != NULL && (!my_strcmp("-n", av[i]))) {
-        i = elem_add_n(add, av, i);
+        i = elem_add_n(add, av, i, opt);
     }
     else {
         i = elem_add_std(add, av, i, opt);

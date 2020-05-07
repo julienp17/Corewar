@@ -13,11 +13,12 @@
 void error_name(prog_info_t *info);
 void err_address(int nb);
 
-int elem_add_n(prog_info_t *add, char **av, int i)
+int elem_add_n(prog_info_t *add, char **av, int i, get_opt_t *opt)
 {
     printf("in add n\n");
     add->load_address = -1;
     i += 1;
+    erro_prog_nb(opt->prog, my_atoi(av[i]));
     add->prog_name = my_atoi(av[i]);
     error_name(add);
     i += 1;

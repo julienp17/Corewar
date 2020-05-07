@@ -43,9 +43,10 @@ void read_files(prog_info_t *filepaths, int nb_prog);
 get_opt_t *my_get_opt(char **av);
 prog_info_t *free_list(prog_info_t *list);
 int add_prog_infos(char **av, int i , get_opt_t *opt);
-int elem_add_n(prog_info_t *add, char **av, int i);
+int elem_add_n(prog_info_t *add, char **av, int i, get_opt_t *opt);
 int elem_add_a(prog_info_t *add, char **av, int i, get_opt_t *tmp);
 int elem_add_std(prog_info_t *add, char **av, int i, get_opt_t *opt);
 int get_prog_nb(prog_info_t *my_prog);
+void erro_prog_nb(prog_info_t *my_prog, int nb_test);
 
 #endif /* !FILE_INFO_H_ */
