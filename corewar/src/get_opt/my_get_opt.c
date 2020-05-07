@@ -7,40 +7,50 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "file_informations.h"
 #include "my.h"
+#include "file_informations.h"
 
-void display_prog(my_get_opt_t *opt);
+void display_prog(get_opt_t *opt);
 
-int add_prog_infos(char **av, int i , my_get_opt_t *opt)
+int add_elements(prog_info_t *add, int i, char **av, get_opt_t *opt)
+{
+    if (av[i] != NULL && (!my_strcmp("-a", av[i]))) {
+        i = elem_add_a(add, av, i, opt);
+    }
+    else if (av[i] != NULL && (!my_strcmp("-n", av[i]))) {
+        i = elem_add_n(add, av, i);
+    }
+    else {
+        i = elem_add_std(add, av, i, opt);
+    }
+}
+int add_prog_infos(char **av, int i , get_opt_t *opt)
 {
     prog_info_t *tmp = NULL;
     prog_info_t *add = NULL;
-    int reference = i;
+
     add = malloc(sizeof(prog_info_t));
     tmp = opt->prog;
 
-
-    i = elem_add_n(&add, av, i);
-    i = elem_add_a(&add, av, i, opt);
-    i = elem_add_std(&add, av, i, opt);
-
+    i = add_elements(add, i, av, opt);
     if (tmp == NULL) {
+        add->next = NULL;
         opt->prog = add;
         return (i);
     }
     while (tmp->next != NULL) {
         tmp = tmp->next;
     }
+    add->next = NULL;
     tmp->next = add;
     return (i);
 }
 
-my_get_opt_t *my_get_opt(char **av)
+get_opt_t *my_get_opt(char **av)
 {
-    my_get_opt_t *opt = NULL;
+    get_opt_t *opt = NULL;
 
-    opt = malloc(sizeof(my_get_opt_t));
+    opt = malloc(sizeof(get_opt_t));
     opt->prog = NULL;
     for (int i = 1; av[i]; i++) {
         if ((!my_strcmp("-dump", av[i])) || (!my_strcmp("-d", av[i]))) {
@@ -50,12 +60,11 @@ my_get_opt_t *my_get_opt(char **av)
         i = add_prog_infos(av, i, opt);
     }
     display_prog(opt);
-    // printf("HERE\n");
     free_list(opt->prog);
     return (opt);
 }
 
-void display_prog(my_get_opt_t *opt)
+void display_prog(get_opt_t *opt)
 {
     printf("DISPLAY:\n");
     while (opt->prog) {

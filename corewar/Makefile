@@ -23,8 +23,7 @@ SRC_F		=	fill_buffer.c \
 				get_opt/prog_nb.c 	\
 				get_file_size.c \
 				get_files/read_files.c \
-				get_files/get_header.c \
-				get_files/get_prog.c \
+				get_files/get_header.c
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)

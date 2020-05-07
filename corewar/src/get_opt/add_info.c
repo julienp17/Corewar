@@ -13,68 +13,58 @@
 void error_name(prog_info_t *info);
 void err_address(int nb);
 
-int elem_add_n(prog_info_t **add, char **av, int i)
+int elem_add_n(prog_info_t *add, char **av, int i)
 {
-    if ((!my_strcmp("-n", av[i]))) {
-        (*add)->load_address = -1;
-        i += 1;
-        (*add)->prog_name = my_atoi(av[i]);
-        error_name((*add));
-        i += 1;
-        if (my_strcmp("-a", av[i]) == 0) {
-            i++;
-            (*add)->load_address = my_atoi(av[i]);
-            i++;
-        }
-        if (my_strcmp("-a", av[i]) && my_strcmp("-n", av[i])) {
-            (*add)->file_path = my_strdup(av[i]);
-        }
-        else
-            exit (INVALID_OPTION);
+    printf("in add n\n");
+    add->load_address = -1;
+    i += 1;
+    add->prog_name = my_atoi(av[i]);
+    error_name(add);
+    i += 1;
+    if (my_strcmp("-a", av[i]) == 0) {
+        i++;
+        add->load_address = my_atoi(av[i]);
+        i++;
     }
-    return (i);
-}
-
-int elem_add_a(prog_info_t **add, char **av, int i, my_get_opt_t *tmp)
-{
-    if ((!my_strcmp("-a", av[i]))) {
-        i += 1;
-        (*add)->load_address = my_atoi(av[i]);
-        err_address((*add)->load_address);
-        i += 1;
-        if ((!my_strcmp("-n", av[i]))) {
-            i++;
-            (*add)->prog_name = my_atoi(av[i]);
-            error_name((*add));
-            i++;
-        }
-        else {
-            (*add)->prog_name  = get_prog_nb(tmp);
-        }
-        if (my_strcmp("-a", av[i]) && my_strcmp("-n", av[i])) {
-            (*add)->file_path = my_strdup(av[i]);
-        }
-        else
-            exit (INVALID_OPTION);
-    }
-    return (i);
-}
-
-int elem_add_std(prog_info_t **add, char **av, int i, my_get_opt_t *tmp)
-{
     if (my_strcmp("-a", av[i]) && my_strcmp("-n", av[i])) {
-        printf("in\n");
-        (*add)->file_path = my_strdup(av[i]);
-        // if ((*add)->prog_name  == 0) {
-        //     (*add)->prog_name  = get_prog_nb(tmp);
-        // }
-        // if ((*add)->load_address == 0) {
-        //     (*add)->load_address = -1;
-        // }
+        add->file_path = my_strdup(av[i]);
     }
     else
         exit (INVALID_OPTION);
+    return (i);
+}
 
+int elem_add_a(prog_info_t *add, char **av, int i, get_opt_t *tmp)
+{
+    printf("in add a\n");
+    i += 1;
+    add->load_address = my_atoi(av[i]);
+    err_address(add->load_address);
+    i += 1;
+    if ((!my_strcmp("-n", av[i]))) {
+        i++;
+        add->prog_name = my_atoi(av[i]);
+        error_name(add);
+        i++;
+    }
+    else {
+        add->prog_name = get_prog_nb(tmp);
+    }
+    if (my_strcmp("-a", av[i]) && my_strcmp("-n", av[i])) {
+        add->file_path = my_strdup(av[i]);
+    }
+    else
+        exit (INVALID_OPTION);
+    return (i);
+}
+
+int elem_add_std(prog_info_t *add, char **av, int i, get_opt_t *opt)
+{
+
+    printf("in add std\tav [%s]\n", av[i]);
+    add->file_path = my_strdup(av[i]);
+    add->prog_name  = -15;
+    add->load_address = -1;
     return (i);
 }
 
