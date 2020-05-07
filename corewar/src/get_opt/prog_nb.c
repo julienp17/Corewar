@@ -8,9 +8,9 @@
 #include <stddef.h>
 #include "file_informations.h"
 
-int free_prog_nb(get_opt_t *my_prog, int nb_test);
+int free_prog_nb(prog_info_t *my_prog, int nb_test);
 
-int get_prog_nb(get_opt_t *my_prog)
+int get_prog_nb(prog_info_t *my_prog)
 {
     int nb_test = 1;
     int nb_free = 0;
@@ -24,15 +24,15 @@ int get_prog_nb(get_opt_t *my_prog)
     return (nb_test);
 }
 
-int free_prog_nb(get_opt_t *my_prog, int nb_test)
+int free_prog_nb(prog_info_t *my_prog, int nb_test)
 {
-    get_opt_t *tmp = NULL;
+    prog_info_t *tmp;
 
     tmp = my_prog;
-    while (tmp->prog) {
-        if (tmp->prog->prog_name == nb_test)
+    while (tmp) {
+        if (tmp->prog_name == nb_test)
             return (-1);
-        tmp->prog = tmp->prog->next;
+        tmp = tmp->next;
     }
     return (nb_test);
 }

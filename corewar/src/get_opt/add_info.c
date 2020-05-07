@@ -48,7 +48,7 @@ int elem_add_a(prog_info_t *add, char **av, int i, get_opt_t *tmp)
         i++;
     }
     else {
-        add->prog_name = get_prog_nb(tmp);
+        add->prog_name = get_prog_nb(tmp->prog);
     }
     if (my_strcmp("-a", av[i]) && my_strcmp("-n", av[i])) {
         add->file_path = my_strdup(av[i]);
@@ -63,7 +63,7 @@ int elem_add_std(prog_info_t *add, char **av, int i, get_opt_t *opt)
 
     printf("in add std\tav [%s]\n", av[i]);
     add->file_path = my_strdup(av[i]);
-    add->prog_name  = -15;
+    add->prog_name  = get_prog_nb(opt->prog);;
     add->load_address = -1;
     return (i);
 }
