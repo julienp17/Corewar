@@ -11,7 +11,6 @@
 #include "file_informations.h"
 
 void display_prog(get_opt_t *opt);
-int list_size(prog_info_t *prog);
 
 int add_elements(prog_info_t *add, int i, char **av, get_opt_t *opt)
 {
@@ -24,6 +23,7 @@ int add_elements(prog_info_t *add, int i, char **av, get_opt_t *opt)
     else {
         i = elem_add_std(add, av, i, opt);
     }
+    return (i);
 }
 
 int add_prog_infos(char **av, int i , get_opt_t *opt)
@@ -54,34 +54,22 @@ get_opt_t *my_get_opt(char **av)
 
     opt = malloc(sizeof(get_opt_t));
     opt->prog = NULL;
+    opt->nb_cycle = 0;
+    opt->nb_cycle = -1;
     for (int i = 1; av[i]; i++) {
         if ((!my_strcmp("-dump", av[i])) || (!my_strcmp("-d", av[i]))) {
             opt->nb_cycle = my_atoi(av[(i + 1)]);
+            error_cycle(opt->nb_cycle);
             i += 2;
         }
         i = add_prog_infos(av, i, opt);
     }
-    if (list_size(opt->prog) > 4) {
-        printf("The number of champion load is above the limit.\n");
-        exit(1);
-    }
+    error_arg(opt);
     display_prog(opt);
     free_list(opt->prog);
     return (opt);
 }
 
-int list_size(prog_info_t *prog)
-{
-    prog_info_t *tmp = NULL;
-    int i = 0;
-
-    tmp = prog;
-    while (tmp) {
-        i++;
-        tmp = tmp->next;
-    }
-    return (i);
-}
 void display_prog(get_opt_t *opt)
 {
     printf("DISPLAY:\n");

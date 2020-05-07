@@ -48,5 +48,8 @@ int elem_add_a(prog_info_t *add, char **av, int i, get_opt_t *tmp);
 int elem_add_std(prog_info_t *add, char **av, int i, get_opt_t *opt);
 int get_prog_nb(prog_info_t *my_prog);
 void erro_prog_nb(prog_info_t *my_prog, int nb_test);
-
+void error_arg(get_opt_t *opt);
+void error_cycle(int nb);
+void usage_display(void);
+int list_size(prog_info_t *prog);
 #endif /* !FILE_INFO_H_ */
