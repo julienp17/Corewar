@@ -23,6 +23,7 @@ SRC_F		=	fill_buffer.c \
 				get_opt/free_list.c \
 				get_opt/add_info.c 	\
 				get_opt/prog_nb.c 	\
+				get_opt/error_opt.c 	\
 				get_file_size.c \
 				get_files/read_files.c \
 				get_files/get_header.c \

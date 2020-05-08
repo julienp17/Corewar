@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "file_informations.h"
+#include "champion_data.h"
 #include "instructions.h"
 #include "op.h"
 #include "my.h"
@@ -24,17 +24,15 @@ instr_t *get_prog(int fd)
     instr_t *new_instr = get_instruction(fd);
 
     while (new_instr != NULL) {
-        if (new_instr->op.mnemonique != NULL)
-            instr = add_instr_list(instr, new_instr);
+        instr = add_instr_list(instr, new_instr);
         new_instr = get_instruction(fd);
     }
-
-    /*for (instr_t *tmp = instr; tmp; tmp = tmp->next) {
+    for (instr_t *tmp = instr; tmp; tmp = tmp->next) {
         if (tmp != NULL) {
             printf("%s  ", tmp->op.mnemonique);
             printf("%x    \n", tmp->coding_byte);
-        }
-    }*/
+        } //ça segfault ici parce que des fois op.mnemonique = NULL
+    }
     return instr;
 }
 

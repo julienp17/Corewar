@@ -13,15 +13,15 @@
 #include <stdlib.h>
 #include "op.h"
 #include "my.h"
-#include "file_informations.h"
+#include "champion_data.h"
 
 static int open_file(char *fp);
 
-void read_files(prog_info_t *filepaths, int nb_prog)
+void read_files(champion_data_t *filepaths, int nb_prog)
 {
     int fd = 0;
-    files_inf_t **files = malloc(sizeof(files_inf_t *) * nb_prog + 1);
-    prog_info_t *tmp = filepaths;
+    files_inf_t **files = malloc(sizeof(files_inf_t) * nb_prog + 1);
+    champion_data_t *tmp = filepaths;
 
     files[nb_prog] = NULL;
     for (int i = 0; tmp != NULL; i++) {

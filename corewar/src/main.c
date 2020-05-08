@@ -9,13 +9,13 @@
 #include <stdio.h>
 
 #include "file_control.h"
-#include "file_informations.h"
+#include "champion_data.h"
 #include "op.h"
 #include "instructions.h"
 
 int main(int ac, char **av)
 {
-    my_get_opt_t *infos = NULL;
+    get_opt_t *infos = NULL;
 
     if (ac < 2)
         return (84);
