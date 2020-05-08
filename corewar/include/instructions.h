@@ -1,29 +1,23 @@
 /*
 ** EPITECH PROJECT, 2020
-** corewar
+** Corewar VM
 ** File description:
-** instructions
+** Instruction structure header file
 */
 
-#include "op.h"
-
 #ifndef INSTRUCTIONS_H_
-#define INSTRUCTIONS_H_
+    #define INSTRUCTIONS_H_
 
-#define HEADER_SIZE sizeof(int)+(sizeof(char)*PROG_NAME_LENGTH)+(sizeof(int))+(sizeof(char) * COMMENT_LENGTH)
-#define R_INST 1
-#define R_CODE 2
-#define R_PARAM 3
+    #include "argument.h"
+    #include "op.h"
 
-typedef struct s_parameters_prog {
-    int value;
-    int type;
-}params_t;
+    typedef struct instruction {
+        op_t op;
+        char coding_byte;
+        arg_t args[MAX_ARGS_NUMBER];
+        struct instruction *next;
+    }instr_t;
 
-typedef struct s_infos_instructions {
-    op_t op;
-    params_t **params;
-    struct s_infos_instructions *next;
-}instr_t;
+instr_t *get_prog(int fd);
 
-#endif /* !INSTRUCTIONS_H_ */
+#endif

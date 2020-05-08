@@ -12,4 +12,7 @@
 
     int16_t swap_int16(int16_t val);
     int32_t swap_int32(int32_t val);
+    op_t op_get_by_code(unsigned char code);
+    bool op_has_coding_byte(op_t op);
+
 #endif

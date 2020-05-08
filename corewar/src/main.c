@@ -11,11 +11,15 @@
 #include "file_control.h"
 #include "file_informations.h"
 #include "op.h"
+#include "instructions.h"
 
 int main(int ac, char **av)
 {
+    my_get_opt_t *infos = NULL;
+
     if (ac < 2)
         return (84);
-    my_get_opt(av);
+    infos = my_get_opt(av);
+    read_files(infos->prog, 1);
     return (0);
 }

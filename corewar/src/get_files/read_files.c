@@ -20,13 +20,15 @@ static int open_file(char *fp);
 void read_files(prog_info_t *filepaths, int nb_prog)
 {
     int fd = 0;
-    files_inf_t **files = malloc(sizeof(files_inf_t) * nb_prog + 1);
+    files_inf_t **files = malloc(sizeof(files_inf_t *) * nb_prog + 1);
     prog_info_t *tmp = filepaths;
 
     files[nb_prog] = NULL;
-    for (int i = 0; tmp; i++) {
+    for (int i = 0; tmp != NULL; i++) {
+        files[i] = malloc(sizeof(files_inf_t));
         fd = open_file(tmp->file_path);
         files[i]->header = get_header(fd);
+        files[i]->instructions = get_prog(fd);
         close(fd);
         tmp = tmp->next;
     }
@@ -38,9 +40,7 @@ static int open_file(char *fp)
 
     fd = open(fp, O_RDONLY);
     if (fd < 0) {
-        my_puterr("Can't open file: ");
-        my_puterr(fp);
-        my_puterr(".\n");
+        my_puterr("Can't open file\n");
         exit(EXIT_FAILURE);
     }
     return fd;

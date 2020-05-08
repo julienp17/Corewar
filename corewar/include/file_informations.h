@@ -6,6 +6,7 @@
 */
 
 #include "op.h"
+#include "instructions.h"
 
 #ifndef FILE_INFO_H_
 #define FILE_INFO_H_
@@ -23,7 +24,7 @@ enum data_type {
 };
 typedef struct s_files_info {
     header_t header;
-    //prog var
+    instr_t *instructions;
 }files_inf_t;
 
 typedef struct s_prog_info {

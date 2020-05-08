@@ -49,9 +49,8 @@ my_get_opt_t *my_get_opt(char **av)
         }
         i = add_prog_infos(av, i, opt);
     }
-    display_prog(opt);
+    //display_prog(opt);
     // printf("HERE\n");
-    free_list(opt->prog);
     return (opt);
 }
 

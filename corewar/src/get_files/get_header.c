@@ -5,13 +5,14 @@
 ** get_header
 */
 
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include "file_informations.h"
 #include "op.h"
-#include <stdio.h>
 #include "my.h"
+#include "corewar.h"
 
 header_t get_header(int fd)
 {
@@ -23,13 +24,14 @@ header_t get_header(int fd)
     char buf[read_size];
 
     read(fd, &buf, sizeof(int));
-    header.magic = *(int *) buf;
+    header.magic = swap_int32(*(int *) buf);
     read(fd, &buf, (sizeof(char) * PROG_NAME_LENGTH));
     my_strcpy(header.prog_name, buf);
     read(fd, &buf, sizeof(int));
     read(fd, &buf, sizeof(int));
-    header.prog_size = *(int *) buf;
+    header.prog_size = swap_int32(*(int *) buf);
     read(fd, &buf, (sizeof(char) * COMMENT_LENGTH));
+    read(fd, &buf, (sizeof(int)));
     my_strcpy(header.comment, buf);
     return header;
 }
