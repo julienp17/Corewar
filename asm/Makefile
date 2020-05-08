@@ -51,6 +51,7 @@ SRC_UT_D 	= 	tests/
 SRC_UT_F 	=	test_parse_instruction.c \
 				test_instruction_is_correct.c \
 				test_swap_endianess.c \
+				structures/asm/test_asm_create.c \
 
 CFLAGS		=	$(WFLAGS) $(INC) $(LDFLAGS)
 
