@@ -15,7 +15,7 @@ int exec_instruc(files_inf_t *files, int cycle)
     int i = 0;
 
     ram = malloc(sizeof(char) * MEM_SIZE);
-    load_champion(files, ram);
+    load_champion(files, &ram);
     for (size_t i = 1; i <= cycle; i++) {
 
     }

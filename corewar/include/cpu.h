@@ -8,8 +8,15 @@
 #ifndef CPU_H_
 #define CPU_H_
 
-#include "instruction.h"
+#include "instructions.h"
 
-vois cpu(files_inf_t *files, int cycle);
+typedef struct s_champion
+{
+    int prog_nb;
+    int load_address;
+    instr_t *instructions;
+}champion_t;
+
+void cpu(champion_t *files, int cycle);
 
 #endif /* !CPU_H_ */

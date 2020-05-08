@@ -5,9 +5,10 @@
 ** load_in_ram
 */
 
-#include "instruction.h"
+#include "cpu.h"
 
-// void load_champion(instr_t *files, char *ram)
-// {
-//     return;
-// }
+void load_champion(champion_t **champions, char **ram)
+{
+
+    return;
+}
