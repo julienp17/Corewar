@@ -8,11 +8,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "my.h"
-#include "file_informations.h"
+#include "champion_data.h"
 
 void display_prog(get_opt_t *opt);
 
-int add_elements(prog_info_t *add, int i, char **av, get_opt_t *opt)
+int add_elements(champion_data_t *add, int i, char **av, get_opt_t *opt)
 {
     if (av[i] != NULL && (!my_strcmp("-a", av[i]))) {
         i = elem_add_a(add, av, i, opt);
@@ -28,10 +28,10 @@ int add_elements(prog_info_t *add, int i, char **av, get_opt_t *opt)
 
 int add_prog_infos(char **av, int i , get_opt_t *opt)
 {
-    prog_info_t *tmp = NULL;
-    prog_info_t *add = NULL;
+    champion_data_t *tmp = NULL;
+    champion_data_t *add = NULL;
 
-    add = malloc(sizeof(prog_info_t));
+    add = malloc(sizeof(champion_data_t));
     tmp = opt->prog;
 
     i = add_elements(add, i, av, opt);
@@ -74,7 +74,7 @@ void display_prog(get_opt_t *opt)
 {
     printf("DISPLAY:\n");
     while (opt->prog) {
-        printf("opt->prog->prog_name = [%d]\n", opt->prog->prog_name);
+        printf("opt->prog->prog_nb = [%d]\n", opt->prog->prog_nb);
         printf("opt->prog->load_address = [%d]\n", opt->prog->load_address);
         printf("opt->prog->file_path = [%s]\n\n\n\n", opt->prog->file_path);
         opt->prog = opt->prog->next;

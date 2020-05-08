@@ -9,13 +9,15 @@
 #include <stdio.h>
 
 #include "file_control.h"
-#include "file_informations.h"
+#include "champion_data.h"
 #include "op.h"
 
 int main(int ac, char **av)
 {
-    if (ac < 2)
-        return (84);
+    if (ac < 2) {
+        usage_display();
+        return (1);
+    }
     my_get_opt(av);
     return (0);
 }

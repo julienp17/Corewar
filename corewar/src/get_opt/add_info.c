@@ -8,17 +8,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "my.h"
-#include "file_informations.h"
+#include "champion_data.h"
 
-void error_name(prog_info_t *info);
+void error_name(champion_data_t *info);
 void err_address(int nb);
 
-int elem_add_n(prog_info_t *add, char **av, int i, get_opt_t *opt)
+int elem_add_n(champion_data_t *add, char **av, int i, get_opt_t *opt)
 {
     add->load_address = -1;
     i += 1;
     erro_prog_nb(opt->prog, my_atoi(av[i]));
-    add->prog_name = my_atoi(av[i]);
+    add->prog_nb = my_atoi(av[i]);
     error_name(add);
     i += 1;
     if (av[i] != NULL && my_strcmp("-a", av[i]) == 0) {
@@ -34,7 +34,7 @@ int elem_add_n(prog_info_t *add, char **av, int i, get_opt_t *opt)
     return (i);
 }
 
-int elem_add_a(prog_info_t *add, char **av, int i, get_opt_t *tmp)
+int elem_add_a(champion_data_t *add, char **av, int i, get_opt_t *tmp)
 {
     i += 1;
     add->load_address = my_atoi(av[i]);
@@ -42,12 +42,13 @@ int elem_add_a(prog_info_t *add, char **av, int i, get_opt_t *tmp)
     i += 1;
     if (av[i] != NULL && (!my_strcmp("-n", av[i]))) {
         i++;
-        add->prog_name = my_atoi(av[i]);
+        erro_prog_nb(tmp->prog, my_atoi(av[i]));
+        add->prog_nb = my_atoi(av[i]);
         error_name(add);
         i++;
     }
     else {
-        add->prog_name = get_prog_nb(tmp->prog);
+        add->prog_nb = get_prog_nb(tmp->prog);
     }
     if (av[i] != NULL && my_strcmp("-a", av[i]) && my_strcmp("-n", av[i])) {
         add->file_path = my_strdup(av[i]);
@@ -57,29 +58,23 @@ int elem_add_a(prog_info_t *add, char **av, int i, get_opt_t *tmp)
     return (i);
 }
 
-int elem_add_std(prog_info_t *add, char **av, int i, get_opt_t *opt)
+int elem_add_std(champion_data_t *add, char **av, int i, get_opt_t *opt)
 {
     add->file_path = my_strdup(av[i]);
-    add->prog_name  = get_prog_nb(opt->prog);;
+    add->prog_nb  = get_prog_nb(opt->prog);;
     add->load_address = -1;
     return (i);
 }
 
-void error_name(prog_info_t *info)
+int list_size(champion_data_t *prog)
 {
-    if (info->prog_name > 4 || info->prog_name < 1 ) {
-        printf("-n argument %d is invalid.\n", info->prog_name);
-        printf("Enter a number between 1 and 4.\n");
-        exit(1);
-    }
-}
+    champion_data_t *tmp = NULL;
+    int i = 0;
 
-void err_address(int nb)
-{
-    if (nb < 0) {
-        printf("-a argument %d is invalid.\n", nb);
-        printf("Enter a valid memory offset.\n");
-        exit(1);
+    tmp = prog;
+    while (tmp) {
+        i++;
+        tmp = tmp->next;
     }
-
+    return (i);
 }

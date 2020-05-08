@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <stddef.h>
-#include "file_informations.h"
+#include "champion_data.h"
 
 void usage_display(void)
 {
@@ -36,16 +36,21 @@ void error_arg(get_opt_t *opt)
     }
 }
 
-
-int list_size(prog_info_t *prog)
+void error_name(champion_data_t *info)
 {
-    prog_info_t *tmp = NULL;
-    int i = 0;
-
-    tmp = prog;
-    while (tmp) {
-        i++;
-        tmp = tmp->next;
+    if (info->prog_nb > 4 || info->prog_nb < 1 ) {
+        printf("-n argument %d is invalid.\n", info->prog_nb);
+        printf("Enter a number between 1 and 4.\n");
+        exit(1);
     }
-    return (i);
+}
+
+void err_address(int nb)
+{
+    if (nb < 0) {
+        printf("-a argument %d is invalid.\n", nb);
+        printf("Enter a valid memory offset.\n");
+        exit(1);
+    }
+
 }

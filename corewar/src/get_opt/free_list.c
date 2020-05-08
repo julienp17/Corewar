@@ -6,11 +6,11 @@
 */
 
 #include <stdlib.h>
-#include "file_informations.h"
+#include "champion_data.h"
 
-prog_info_t *free_list(prog_info_t *list)
+champion_data_t *free_list(champion_data_t *list)
 {
-    prog_info_t *tmp = NULL;
+    champion_data_t *tmp = NULL;
 
     if (list == NULL)
         return (NULL);

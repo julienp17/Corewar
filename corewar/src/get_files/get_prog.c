@@ -5,7 +5,7 @@
 ** get_prog
 */
 
-#include "file_informations.h"
+#include "champion_data.h"
 #include <unistd.h>
 #include "instructions.h"
 #include "op.h"
@@ -38,6 +38,6 @@ static params_t **get_params_type(params_t **params, char coding_byte, op_t op)
     int mask = 0b11000000;
 
     for (int i = 0; params[i]; i++) {
-        
+
     }
 }
