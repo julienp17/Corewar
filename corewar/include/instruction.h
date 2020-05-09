@@ -13,7 +13,6 @@
 
     typedef struct instruction {
         op_t op;
-        char coding_byte;
         arg_t args[MAX_ARGS_NUMBER];
         struct instruction *next;
     } instruction_t;
