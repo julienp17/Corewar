@@ -65,8 +65,8 @@ get_opt_t *my_get_opt(char **av)
         i = add_prog_infos(av, i, opt);
     }
     error_arg(opt);
-    display_prog(opt);
-    free_list(opt->prog);
+    // display_prog(opt);
+    // free_list(opt->prog);
     return (opt);
 }
 
