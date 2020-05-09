@@ -18,4 +18,5 @@
     } arg_t;
 
     bool argument_is_index(op_t op);
+    char argument_get_size(char const arg_type, op_t op);
 #endif
