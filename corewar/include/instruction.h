@@ -16,8 +16,11 @@
         char coding_byte;
         arg_t args[MAX_ARGS_NUMBER];
         struct instruction *next;
-    }instr_t;
+    } instruction_t;
+    typedef struct instruction instr_t;
 
-instr_t *get_prog(int fd);
+    instruction_t *instruction_create(void);
+
+    instr_t *get_prog(int fd);
 
 #endif

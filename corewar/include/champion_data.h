@@ -6,7 +6,7 @@
 */
 
 #include "op.h"
-#include "instructions.h"
+#include "instruction.h"
 
 #ifndef FILE_INFO_H_
 #define FILE_INFO_H_

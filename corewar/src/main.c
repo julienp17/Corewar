@@ -7,11 +7,10 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-
 #include "file_control.h"
 #include "champion_data.h"
 #include "op.h"
-#include "instructions.h"
+#include "instruction.h"
 
 int main(int ac, char **av)
 {

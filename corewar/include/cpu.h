@@ -8,7 +8,7 @@
 #ifndef CPU_H_
 #define CPU_H_
 
-#include "instructions.h"
+#include "instruction.h"
 
 typedef struct s_champion
 {

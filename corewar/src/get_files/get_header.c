@@ -13,7 +13,7 @@
 #include "op.h"
 #include "my.h"
 #include "corewar.h"
-#include "instructions.h"
+#include "instruction.h"
 
 header_t get_header(int fd)
 {
