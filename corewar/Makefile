@@ -26,11 +26,11 @@ SRC_F		=	fill_buffer.c \
 				get_opt/prog_nb.c 	\
 				get_opt/error_opt.c 	\
 				get_file_size.c \
-				get_files/get_header.c \
 				get_files/get_prog.c \
 				structures/champion/champion_load_header.c \
 				structures/vm/vm_create.c \
 				structures/vm/vm_destroy.c \
+				structures/vm/vm_dump_mem.c \
 				structures/instruction/instruction_create.c \
 				utilities/swap_endianess.c \
 
