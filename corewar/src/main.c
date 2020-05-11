@@ -11,6 +11,7 @@
 #include "champion_data.h"
 #include "op.h"
 #include "instruction.h"
+#include "corewar.h"
 
 int main(int ac, char **av)
 {
@@ -19,6 +20,6 @@ int main(int ac, char **av)
     if (ac < 2)
         return (84);
     infos = my_get_opt(av);
-    read_files(infos->prog, 1);
+    corewar(infos->prog, 2);
     return (0);
 }
