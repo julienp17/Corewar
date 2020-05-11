@@ -10,7 +10,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include "champion_data.h"
-#include "virtual_machine.h"
+#include "vm.h"
 #include "my.h"
 #include "corewar.h"
 

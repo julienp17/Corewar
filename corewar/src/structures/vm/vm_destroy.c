@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "virtual_machine.h"
+#include "vm.h"
 
 void vm_destroy(vm_t *vm)
 {

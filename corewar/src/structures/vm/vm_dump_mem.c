@@ -6,7 +6,7 @@
 */
 
 #include <stdio.h>
-#include "virtual_machine.h"
+#include "vm.h"
 
 void vm_dump_mem(vm_t *vm)
 {

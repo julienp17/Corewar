@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "virtual_machine.h"
+#include "vm.h"
 #include "my.h"
 
 static void init_ram(char ram[MEM_SIZE]);
