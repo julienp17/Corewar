@@ -14,10 +14,12 @@
     #define MAX_CHAMPIONS          4
 
     typedef struct virtual_machine {
-        char ram[MEM_SIZE];
+        char mem[MEM_SIZE];
         champion_t champions[MAX_CHAMPIONS];
     } vm_t;
 
     vm_t *vm_create(void);
     void vm_destroy(vm_t *vm);
+
+    void vm_dump_mem(vm_t *vm);
 #endif
