@@ -38,7 +38,7 @@ static bool is_direct(char const *arg)
 {
     return (
         arg[0] == DIRECT_CHAR
-        && (arg[1] == LABEL_CHAR || my_str_isnum(arg + 1))
+        && (arg[1] && (arg[1] == LABEL_CHAR || my_str_isnum(arg + 1)))
     );
 }
 
