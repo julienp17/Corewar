@@ -18,6 +18,7 @@ int corewar(champion_data_t *filepaths, int nb_prog)
 {
     vm_t *vm = NULL;
     int fd = 0;
+    int load_address = 0;
 
     vm = vm_create();
     if (vm == NULL)
@@ -30,14 +31,22 @@ int corewar(champion_data_t *filepaths, int nb_prog)
         }
         if (champion_load_header(&(vm->champions[i]), fd) == EXIT_FAILURE)
             return (EXIT_FAILURE);
-        vm->champions[i].nb = filepaths->prog_nb;
         vm->champions[i].is_alive = true;
+        vm->champions[i].nb = filepaths->prog_nb;
+        if (vm->champions[i].header.prog_size > (MEM_SIZE / nb_prog)) {
+            my_puterr("Program size is too big\n");
+            return (EXIT_FAILURE);
+        }
+        load_address = ((MEM_SIZE / nb_prog) * (vm->champions[i].nb - 1));
+        read(fd, &(vm->mem[load_address]), vm->champions[i].header.prog_size);
+        vm->champions[i].pc = load_address;
         if (close(fd) < 0) {
-            my_puterr("Couldn't open file.\n");
+            my_puterr("Couldn't close file.\n");
             return (EXIT_FAILURE);
         }
         filepaths = filepaths->next;
     }
+    vm_dump_mem(vm);
     vm_destroy(vm);
     return (EXIT_SUCCESS);
 }
