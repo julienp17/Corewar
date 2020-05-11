@@ -32,8 +32,8 @@ static bool asm_state_is_good(asm_t *asb)
         asm_puterr(asb, "The name of your program must be the first line");
         return (false);
     }
-    if (my_str_is_empty(asb->header.comment) == false) {
-        asm_puterr(asb, "The comment can only be defined once");
+    if (my_str_is_empty(asb->header.prog_name) == false) {
+        asm_puterr(asb, "The name can only be defined once");
         return (false);
     }
     return (true);
