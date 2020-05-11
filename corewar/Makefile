@@ -17,6 +17,7 @@ SRC_D		=	src/
 
 SRC_F		=	fill_buffer.c \
 				op.c \
+				corewar.c \
 				arguments/argument_is_index.c \
 				arguments/argument_get_size.c \
 				get_opt/my_get_opt.c \
@@ -25,9 +26,11 @@ SRC_F		=	fill_buffer.c \
 				get_opt/prog_nb.c 	\
 				get_opt/error_opt.c 	\
 				get_file_size.c \
-				get_files/read_files.c \
 				get_files/get_header.c \
 				get_files/get_prog.c \
+				structures/champion/champion_load_header.c \
+				structures/vm/vm_create.c \
+				structures/vm/vm_destroy.c \
 				structures/instruction/instruction_create.c \
 				utilities/swap_endianess.c \
 
