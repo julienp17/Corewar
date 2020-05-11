@@ -22,10 +22,6 @@ enum data_type {
     LOAD_ADDRESS,
     PROG_NAME
 };
-typedef struct s_files_info {
-    header_t header;
-    instr_t *instructions;
-}files_inf_t;
 
 typedef struct s_champion_data {
     int prog_nb;
