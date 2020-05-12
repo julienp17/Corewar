@@ -46,6 +46,6 @@ static void init_champions(champion_t champions[MAX_CHAMPIONS])
         champions[i].last_live = 0;
         champions[i].nb = 0;
         for (int j = 0 ; j < REG_NUMBER ; j++)
-            champions[i].registers[i] = 0;
+            champions[i].regs[i] = 0;
     }
 }
