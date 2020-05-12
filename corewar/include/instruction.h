@@ -11,15 +11,14 @@
     #include "argument.h"
     #include "op.h"
 
+    #define NO_CB_MASK              0b10000000
+
     typedef struct instruction {
         op_t op;
         arg_t args[MAX_ARGS_NUMBER];
-        struct instruction *next;
     } instruction_t;
-    typedef struct instruction instr_t;
 
     instruction_t *instruction_create(void);
-
-    instr_t *get_prog(int fd);
+    void instruction_reset(instruction_t *instruction);
 
 #endif
