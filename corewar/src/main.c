@@ -23,6 +23,7 @@ int main(int ac, char **av)
     if (vm == NULL)
         return (84);
     vm->nb_champions = 2;
+    vm->nb_alive = vm->nb_champions;
     status = corewar(vm, infos->prog);
     vm_destroy(vm);
     return (status);
