@@ -15,7 +15,7 @@ instruction_t *instruction_create(void)
 
     instruction = malloc(sizeof(instruction_t));
     if (instruction == NULL) {
-        my_puterr("Could'nt allocate memory for instruction structure.\n");
+        my_puterr("Couldn't allocate memory for instruction structure.\n");
         return (NULL);
     }
     instruction->op = (op_t) {0, 0, {0}, 0, 0, 0};
@@ -24,6 +24,5 @@ instruction_t *instruction_create(void)
         instruction->args[i].size = 0;
         instruction->args[i].value = 0;
     }
-    instruction->next = NULL;
     return (instruction);
 }
