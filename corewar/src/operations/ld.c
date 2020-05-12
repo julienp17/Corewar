@@ -10,16 +10,11 @@
 int ld(vm_t *vm, champion_t *champion)
 {
     int value = 0;
-    int address = 0;
     int reg_nb = 0;
 
-    if (champion->instruction->args[0].type == T_IND) {
-        value = champion->instruction->args[0].value;
-    } else if (champion->instruction->args[0].type == T_DIR) {
-        address =(champion->pc + champion->instruction->args[0].value)%MEM_SIZE;
-        value = vm->mem[address];
-    }
+    (void)vm;
+    value  = champion->instruction->args[0].value;
     reg_nb = champion->instruction->args[1].value;
-    champion->regs[reg_nb] = value;
+    champion->regs[reg_nb - 1] = value;
     return (EXIT_SUCCESS);
 }

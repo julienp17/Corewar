@@ -10,13 +10,11 @@
 int zjmp(vm_t *vm, champion_t *champion)
 {
     int index = 0;
-    int value = 0;
 
+    (void)vm;
     if (champion->carry == false)
         return (EXIT_FAILURE);
-    (void)vm;
-    value = champion->instruction->args[0].value;
-    index = champion->pc + value % IDX_MOD;
+    index = champion->instruction->args[0].value;
     champion->pc = index;
     return (EXIT_SUCCESS);
 }
