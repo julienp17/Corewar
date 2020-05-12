@@ -30,6 +30,4 @@
 
     int vm_load_champion(vm_t *vm, char const *filepath, int const champion_nb);
     void vm_dump(vm_t *vm);
-    int champion_execute(vm_t *vm, champion_t *champion);
-    int champion_load_instruction(vm_t *vm, champion_t *champion);
 #endif
