@@ -18,7 +18,7 @@
         int nb;
         int cycle_wait;
         int last_live;
-        int registers[REG_NUMBER];
+        int regs[REG_NUMBER];
         int pc;
         instruction_t *instruction;
         bool carry;
