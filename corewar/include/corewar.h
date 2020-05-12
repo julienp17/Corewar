@@ -18,6 +18,7 @@
 
     op_t op_get_by_code(unsigned char code);
     bool op_has_coding_byte(op_t op);
+    bool op_modifies_carry(op_t op);
     bool op_is_null(op_t op);
 
     int corewar(vm_t *vm, champion_data_t *filepaths);
