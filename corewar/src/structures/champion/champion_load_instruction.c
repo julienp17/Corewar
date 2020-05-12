@@ -8,10 +8,26 @@
 #include "vm.h"
 #include "corewar.h"
 
+static int load_instruction(char mem[MEM_SIZE], champion_t *champion);
 static void fill_args_meta(instruction_t *instruction, uchar coding_byte);
 static void fill_arg_value(char mem[MEM_SIZE], champion_t *champion,arg_t *arg);
 
 int champion_load_instruction(char mem[MEM_SIZE], champion_t *champion)
+{
+    int status = 0;
+
+    status = load_instruction(mem, champion);
+    if (status == EXIT_SUCCESS) {
+        champion->pc = champion->pc + champion->instruction->size;
+        champion->cycle_wait = champion->instruction->op.nbr_cycles;
+    } else {
+        champion->pc++;
+        champion->cycle_wait = 1;
+    }
+    return (status);
+}
+
+static int load_instruction(char mem[MEM_SIZE], champion_t *champion)
 {
     instruction_t *instruction = NULL;
     uchar coding_byte = 0;
