@@ -34,6 +34,18 @@ op_t op_tab[] = {
     {0, 0, {0}, 0, 0, 0}
 };
 
+bool op_is_null(op_t op)
+{
+    return (
+        op.mnemonique == 0
+        && op.nbr_args == 0
+        && op.type[0] == 0
+        && op.code == 0
+        && op.nbr_cycles == 0
+        && op.comment == 0
+    );
+}
+
 op_t op_get_by_name(char const *name)
 {
     unsigned int i = 0;
