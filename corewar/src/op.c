@@ -60,3 +60,15 @@ bool op_has_coding_byte(op_t op)
 {
     return (op.nbr_args != 1 || op.type[0] != T_DIR);
 }
+
+bool op_modifies_carry(op_t op)
+{
+    int const modifies_carry_opcodes[] = {
+        0x04, 0x05, 0x06, 0x07, 0x08, 0x0A, 0x0D, 0x0E, -1
+    };
+
+    for (unsigned int i = 0 ; modifies_carry_opcodes[i] > 0 ; i++)
+        if (op.code == modifies_carry_opcodes[i])
+            return (true);
+    return (false);
+}
