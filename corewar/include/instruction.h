@@ -16,6 +16,7 @@
     typedef struct instruction {
         op_t op;
         arg_t args[MAX_ARGS_NUMBER];
+        int size;
     } instruction_t;
 
     instruction_t *instruction_create(void);

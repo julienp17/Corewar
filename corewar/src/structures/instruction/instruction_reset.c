@@ -15,4 +15,5 @@ void instruction_reset(instruction_t *instruction)
         instruction->args[i].size = 0;
         instruction->args[i].value = 0;
     }
+    instruction->size = 0;
 }

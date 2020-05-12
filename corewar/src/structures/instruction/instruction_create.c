@@ -24,5 +24,6 @@ instruction_t *instruction_create(void)
         instruction->args[i].size = 0;
         instruction->args[i].value = 0;
     }
+    instruction->size = 0;
     return (instruction);
 }
