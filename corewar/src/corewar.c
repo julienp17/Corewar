@@ -14,39 +14,35 @@
 #include "my.h"
 #include "corewar.h"
 
-int corewar(champion_data_t *filepaths, int nb_prog)
-{
-    vm_t *vm = NULL;
-    int fd = 0;
-    int load_address = 0;
+static char get_nb_alive_champions(vm_t *vm);
+static int run_corewar(vm_t *vm);
 
-    vm = vm_create();
-    if (vm == NULL)
-        return (EXIT_FAILURE);
-    for (int i = 0 ; i < nb_prog ; i++) {
-        fd = open(filepaths->file_path, O_RDONLY);
-        if (fd < 0) {
-            my_puterr("Couldn't open file.\n");
-            return (EXIT_FAILURE);
-        }
-        if (champion_load_header(&(vm->champions[i]), fd) == EXIT_FAILURE)
-            return (EXIT_FAILURE);
-        vm->champions[i].is_alive = true;
-        vm->champions[i].nb = filepaths->prog_nb;
-        if (vm->champions[i].header.prog_size > (MEM_SIZE / nb_prog)) {
-            my_puterr("Program size is too big\n");
-            return (EXIT_FAILURE);
-        }
-        load_address = ((MEM_SIZE / nb_prog) * (vm->champions[i].nb - 1));
-        read(fd, &(vm->mem[load_address]), vm->champions[i].header.prog_size);
-        vm->champions[i].pc = load_address;
-        if (close(fd) < 0) {
-            my_puterr("Couldn't close file.\n");
-            return (EXIT_FAILURE);
-        }
+int corewar(vm_t *vm, champion_data_t *filepaths)
+{   
+    for (int i = 0 ; i < vm->nb_champions ; i++) {
+        vm_load_champion(vm, filepaths->file_path, filepaths->prog_nb);
         filepaths = filepaths->next;
     }
     vm_dump_mem(vm);
-    vm_destroy(vm);
+    run_corewar(vm);
     return (EXIT_SUCCESS);
+}
+
+static int run_corewar(vm_t *vm)
+{
+    char nb_alive = 0;
+
+    nb_alive = get_nb_alive_champions(vm);
+    (void)nb_alive;
+    return (EXIT_FAILURE);
+}
+
+static char get_nb_alive_champions(vm_t *vm)
+{
+    char nb_alive = 0;
+
+    for (int i = 0 ; i < MAX_CHAMPIONS ; i++)
+        if (vm->champions[i].is_alive)
+            nb_alive++;
+    return (nb_alive);
 }

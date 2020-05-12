@@ -22,6 +22,7 @@ vm_t *vm_create(void)
         return (NULL);
     }
     init_ram(vm->mem);
+    vm->nb_champions = 0;
     init_champions(vm->champions);
     return (vm);
 }
@@ -40,7 +41,6 @@ static void init_champions(champion_t champions[MAX_CHAMPIONS])
         champions[i].cycle_wait = 0;
         champions[i].is_alive = false;
         champions[i].instruction = NULL;
-        champions[i].nb = 0;
         champions[i].pc = 0;
         for (int j = 0 ; j < REG_NUMBER ; j++)
             champions[i].registers[i] = 0;
