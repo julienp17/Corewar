@@ -58,7 +58,7 @@ static int put_in_mem(vm_t *vm, champion_t *champion, int fd)
 
     memchunk_size = MEM_SIZE / vm->nb_champions;
     if (champion->pc == 0)
-        champion->pc = memchunk_size * (champion->nb - 1);
+        champion->pc = (memchunk_size * (champion->nb - 1)) % MEM_SIZE;
     if (champion->header.prog_size > memchunk_size) {
         my_puterr("Program size is too big\n");
         return (EXIT_FAILURE);
