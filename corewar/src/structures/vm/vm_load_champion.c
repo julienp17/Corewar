@@ -54,5 +54,6 @@ static int load_champion(vm_t *vm, int fd, int const champion_nb)
     read(fd, &(vm->mem[load_address]), champion->header.prog_size);
     champion->pc = load_address;
     champion->is_alive = true;
+    champion_load_instruction(vm->mem, champion);
     return (EXIT_SUCCESS);
 }
