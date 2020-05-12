@@ -30,6 +30,7 @@ SRC_F		=	fill_buffer.c \
 				structures/champion/champion_load_header.c \
 				structures/vm/vm_create.c \
 				structures/vm/vm_destroy.c \
+				structures/vm/vm_load_champion.c \
 				structures/vm/vm_dump_mem.c \
 				structures/instruction/instruction_create.c \
 				utilities/swap_endianess.c \
@@ -43,7 +44,7 @@ CFLAGS		=	$(WFLAGS) $(INC) $(LDFLAGS)
 
 INC			=	-I./include
 
-WFLAGS		=	-W -Wall -Wextra
+WFLAGS		=	-W -Wall -Wextra -Werror
 
 LDFLAGS		=	-L./lib -lmy
 
