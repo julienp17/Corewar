@@ -22,7 +22,7 @@ int champion_execute(vm_t *vm, champion_t *champion)
     if (operation) {
         status = operation(vm, champion);
         if (op_modifies_carry(champion->instruction->op))
-            champion->carry = status;
+            champion->carry = (status == EXIT_SUCCESS) ? true : false;
     }
     status = champion_load_instruction(vm->mem, champion);
     return (status);
