@@ -46,16 +46,6 @@ bool op_is_null(op_t op)
     );
 }
 
-op_t op_get_by_name(char const *name)
-{
-    unsigned int i = 0;
-
-    for (i = 0 ; op_tab[i].mnemonique != 0 ; i++)
-        if (my_strcmp(op_tab[i].mnemonique, name) == 0)
-            return (op_tab[i]);
-    return (op_tab[i]);
-}
-
 op_t op_get_by_code(unsigned char code)
 {
     unsigned int i = 0;
