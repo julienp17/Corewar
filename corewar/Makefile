@@ -15,8 +15,7 @@ SRC			=	$(addprefix $(SRC_D), $(SRC_F))
 OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
 
-SRC_F		=	fill_buffer.c \
-				op.c \
+SRC_F		=	op.c \
 				corewar.c \
 				arguments/argument_is_index.c \
 				arguments/argument_get_size.c \
@@ -24,15 +23,21 @@ SRC_F		=	fill_buffer.c \
 				get_opt/free_list.c \
 				get_opt/add_info.c 	\
 				get_opt/prog_nb.c 	\
-				get_opt/error_opt.c 	\
-				get_file_size.c \
-				get_files/get_prog.c \
+				get_opt/error_opt.c \
+				operations/operation_get.c \
+				operations/live.c \
+				operations/ld.c \
+				operations/zjmp.c \
+				operations/sti.c \
 				structures/champion/champion_load_header.c \
+				structures/champion/champion_load_instruction.c \
+				structures/champion/champion_execute.c \
 				structures/vm/vm_create.c \
 				structures/vm/vm_destroy.c \
 				structures/vm/vm_load_champion.c \
-				structures/vm/vm_dump_mem.c \
+				structures/vm/vm_dump.c \
 				structures/instruction/instruction_create.c \
+				structures/instruction/instruction_reset.c \
 				utilities/swap_endianess.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
