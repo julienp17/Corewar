@@ -19,7 +19,7 @@ int live(vm_t *vm, champion_t *champion)
             champion_living = &(vm->champions[i]);
     if (champion_living) {
         champion_living->last_live = vm->cycle;
-        printf("The player %d(%s) is alive.\n", champion_living->nb,
+        printf("The player %d (%s) is alive.\n", champion_living->nb,
                                             champion_living->header.prog_name);
     }
     return (EXIT_SUCCESS);
