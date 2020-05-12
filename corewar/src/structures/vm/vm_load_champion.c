@@ -10,6 +10,7 @@
 #include "my.h"
 
 static int load_champion(vm_t *vm, int fd, int const champion_nb);
+static int put_in_mem(vm_t *vm, champion_t *champion, int fd);
 
 int vm_load_champion(vm_t *vm, char const *filepath, int const champion_nb)
 {
@@ -31,8 +32,6 @@ int vm_load_champion(vm_t *vm, char const *filepath, int const champion_nb)
 
 static int load_champion(vm_t *vm, int fd, int const champion_nb)
 {
-    int memchunk_size = 0;
-    int load_address = 0;
     champion_t *champion = NULL;
 
     if (champion_nb < 1 || champion_nb > 4) {
@@ -46,15 +45,27 @@ static int load_champion(vm_t *vm, int fd, int const champion_nb)
     }
     champion->nb = champion_nb;
     champion->regs[0] = champion_nb;
+    if (put_in_mem(vm, champion, fd) == EXIT_FAILURE)
+        return (EXIT_FAILURE);
+    champion->is_alive = true;
+    champion_load_instruction(vm->mem, champion);
+    return (EXIT_SUCCESS);
+}
+
+static int put_in_mem(vm_t *vm, champion_t *champion, int fd)
+{
+    int memchunk_size = 0;
+
     memchunk_size = MEM_SIZE / vm->nb_champions;
+    if (champion->pc == 0)
+        champion->pc = memchunk_size * (champion->nb - 1);
     if (champion->header.prog_size > memchunk_size) {
         my_puterr("Program size is too big\n");
         return (EXIT_FAILURE);
     }
-    load_address = memchunk_size * (champion_nb - 1);
-    read(fd, &(vm->mem[load_address]), champion->header.prog_size);
-    champion->pc = load_address;
-    champion->is_alive = true;
-    champion_load_instruction(vm->mem, champion);
+    if (read(fd, &(vm->mem[champion->pc]), champion->header.prog_size) < 0) {
+        my_puterr("Error reading file.\n");
+        return (EXIT_FAILURE);
+    }
     return (EXIT_SUCCESS);
 }
