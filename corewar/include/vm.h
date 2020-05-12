@@ -13,8 +13,9 @@
 
     #define MAX_CHAMPIONS          4
 
+    typedef unsigned char uchar;
     typedef struct virtual_machine {
-        char mem[MEM_SIZE];
+        uchar mem[MEM_SIZE];
         champion_t champions[MAX_CHAMPIONS];
     } vm_t;
 
