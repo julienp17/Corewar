@@ -19,6 +19,7 @@ SRC_F		=	op.c \
 				corewar.c \
 				arguments/argument_is_index.c \
 				arguments/argument_get_size.c \
+				arguments/arguments_are_correct.c \
 				get_opt/my_get_opt.c \
 				get_opt/free_list.c \
 				get_opt/add_info.c 	\
@@ -29,6 +30,7 @@ SRC_F		=	op.c \
 				operations/ld.c \
 				operations/zjmp.c \
 				operations/sti.c \
+				structures/champion/champion_is_alive.c \
 				structures/champion/champion_load_header.c \
 				structures/champion/champion_load_instruction.c \
 				structures/champion/champion_execute.c \
@@ -43,7 +45,8 @@ SRC_F		=	op.c \
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)
 SRC_UT_D 	= 	tests/
-SRC_UT_F 	=
+SRC_UT_F 	=	test_op_is_null.c \
+				test_op_get_by_code.c \
 
 CFLAGS		=	$(WFLAGS) $(INC) $(LDFLAGS)
 
