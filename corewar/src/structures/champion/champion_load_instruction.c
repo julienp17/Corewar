@@ -16,14 +16,13 @@ int champion_load_instruction(char mem[MEM_SIZE], champion_t *champion)
 {
     int status = 0;
 
+    instruction_reset(champion->instruction);
     status = load_instruction(mem, champion);
-    if (status == EXIT_SUCCESS) {
-        champion->pc = champion->pc + champion->instruction->size;
+    if (status == EXIT_SUCCESS)
         champion->cycle_wait = champion->instruction->op.nbr_cycles;
-    } else {
-        champion->pc++;
+    else
         champion->cycle_wait = 1;
-    }
+    champion->pc = champion->pc + champion->instruction->size;
     return (status);
 }
 
@@ -33,7 +32,6 @@ static int load_instruction(char mem[MEM_SIZE], champion_t *champion)
     uchar coding_byte = 0;
 
     instruction = champion->instruction;
-    instruction_reset(instruction);
     instruction->op = op_get_by_code(mem[champion->pc]);
     if (op_is_null(instruction->op))
         return (EXIT_FAILURE);
