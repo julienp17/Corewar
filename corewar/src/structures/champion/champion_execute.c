@@ -19,16 +19,11 @@ int champion_execute(vm_t *vm, champion_t *champion)
         return (EXIT_SUCCESS);
     }
     operation = operation_get(champion->instruction->op.code);
-    if (operation == NULL) {
-        champion->cycle_wait = 1;
-        status = EXIT_FAILURE;
-    } else {
+    if (operation) {
         status = operation(vm, champion);
         if (op_modifies_carry(champion->instruction->op))
             champion->carry = status;
-        champion->cycle_wait = champion->instruction->op.nbr_cycles;
     }
-    champion->pc = (champion->pc + champion->instruction->size) % MEM_SIZE;
-    champion_load_instruction(vm->mem, champion);
+    status = champion_load_instruction(vm->mem, champion);
     return (status);
 }
