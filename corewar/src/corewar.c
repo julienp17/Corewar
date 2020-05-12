@@ -18,22 +18,25 @@ static char get_nb_alive_champions(vm_t *vm);
 static int run_corewar(vm_t *vm);
 
 int corewar(vm_t *vm, champion_data_t *filepaths)
-{   
-    for (int i = 0 ; i < vm->nb_champions ; i++) {
-        vm_load_champion(vm, filepaths->file_path, filepaths->prog_nb);
+{
+    int status = 0;
+
+    for (int i = 0 ; status == EXIT_SUCCESS && i < vm->nb_champions ; i++) {
+        status = vm_load_champion(vm, filepaths->file_path, filepaths->prog_nb);
+        if (status == EXIT_FAILURE)
+            return (EXIT_FAILURE);
         filepaths = filepaths->next;
     }
-    vm_dump_mem(vm);
     run_corewar(vm);
     return (EXIT_SUCCESS);
 }
 
 static int run_corewar(vm_t *vm)
 {
-    char nb_alive = 0;
-
-    nb_alive = get_nb_alive_champions(vm);
-    (void)nb_alive;
+    vm->nb_alive = get_nb_alive_champions(vm);
+    vm->cycle = 13;
+    champion_execute(vm, &(vm->champions[0]));
+    vm_dump(vm);
     return (EXIT_FAILURE);
 }
 
