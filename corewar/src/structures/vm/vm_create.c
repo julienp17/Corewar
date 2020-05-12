@@ -9,7 +9,7 @@
 #include "vm.h"
 #include "my.h"
 
-static void init_ram(uchar ram[MEM_SIZE]);
+static void init_ram(char ram[MEM_SIZE]);
 static void init_champions(champion_t champions[MAX_CHAMPIONS]);
 
 vm_t *vm_create(void)
@@ -26,10 +26,10 @@ vm_t *vm_create(void)
     return (vm);
 }
 
-static void init_ram(uchar ram[MEM_SIZE])
+static void init_ram(char ram[MEM_SIZE])
 {
     for (int i = 0 ; i < MEM_SIZE ; i++)
-        ram[i] = (uchar)0U;
+        ram[i] = 0;
 }
 
 static void init_champions(champion_t champions[MAX_CHAMPIONS])

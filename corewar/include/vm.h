@@ -15,7 +15,7 @@
 
     typedef unsigned char uchar;
     typedef struct virtual_machine {
-        uchar mem[MEM_SIZE];
+        char mem[MEM_SIZE];
         champion_t champions[MAX_CHAMPIONS];
     } vm_t;
 
