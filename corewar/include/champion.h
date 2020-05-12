@@ -24,5 +24,6 @@
         bool carry;
     } champion_t;
 
+    bool champion_is_alive(champion_t *champion, int cycle);
     int champion_load_header(champion_t *champion, int fd);
 #endif
