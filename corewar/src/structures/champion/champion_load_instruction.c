@@ -8,10 +8,8 @@
 #include "vm.h"
 #include "corewar.h"
 
-static bool args_are_correct(op_t op, arg_t args[MAX_ARGS_NUMBER]);
 static void fill_args_meta(instruction_t *instruction, uchar coding_byte);
-static void fill_args_value(instruction_t *instruction, char mem[MEM_SIZE],
-                            int pc);
+static void fill_arg_value(char mem[MEM_SIZE], champion_t *champion,arg_t *arg);
 
 int champion_load_instruction(char mem[MEM_SIZE], champion_t *champion)
 {
@@ -29,25 +27,13 @@ int champion_load_instruction(char mem[MEM_SIZE], champion_t *champion)
     else
         coding_byte = NO_CB_MASK;
     fill_args_meta(instruction, coding_byte);
-    fill_args_value(instruction, mem, champion->pc);
-    if (args_are_correct(instruction->op, instruction->args) == false)
+    for (int i = 0 ; i < instruction->op.nbr_args ; i++)
+        fill_arg_value(mem, champion, &(instruction->args[i]));
+    if (arguments_are_correct(instruction->op, instruction->args) == false) {
+        instruction->op = (op_t) {0, 0, {0}, 0, 0, 0};
         return (EXIT_FAILURE);
+    }
     return (EXIT_SUCCESS);
-}
-
-static bool args_are_correct(op_t op, arg_t args[MAX_ARGS_NUMBER])
-{
-    int nb_args = 0;
-
-    for (int i = 0 ; i < MAX_ARGS_NUMBER ; i++)
-        if (args[i].type != 0)
-            nb_args++;
-    if (nb_args != op.nbr_args)
-        return (false);
-    for (int i = 0 ; i < op.nbr_args ; i++)
-        if ((args[i].type & op.type[i]) == 0)
-            return (false);
-    return (true);
 }
 
 static void fill_args_meta(instruction_t *instruction, uchar coding_byte)
@@ -64,29 +50,25 @@ static void fill_args_meta(instruction_t *instruction, uchar coding_byte)
     }
 }
 
-static void fill_args_value(instruction_t *instruction, char mem[MEM_SIZE],
-                            int pc)
+static void fill_arg_value(char mem[MEM_SIZE], champion_t *champion, arg_t *arg)
 {
     char buf[sizeof(int)] = {0, 0, 0, 0};
-    arg_t *arg = NULL;
-    int index = 0;
     int address = 0;
 
-    for (int i = 0 ; i < instruction->op.nbr_args ; i++) {
-        arg = &(instruction->args[i]);
-        for (int j = 0 ; j < arg->size ; j++) {
-            address = (pc + instruction->size++) % MEM_SIZE;
-            buf[j] = mem[address];
-        }
-        if (arg->type == T_REG)
-            arg->value = buf[0];
-        if (arg->type == T_IND)
+    for (int j = 0 ; j < arg->size ; j++) {
+        address = (champion->pc + champion->instruction->size++) % MEM_SIZE;
+        buf[j] = mem[address];
+    }
+    if (arg->type == T_REG)
+        arg->value = buf[0];
+    if (arg->type == T_IND) {
+        arg->value = swap_int16(*(short int *)(buf));
+        arg->value = (champion->pc + arg->value % IDX_MOD) % MEM_SIZE;
+    }
+    if (arg->type == T_DIR) {
+        if (argument_is_index(champion->instruction->op))
             arg->value = swap_int16(*(short int *)(buf));
-        if (arg->type == T_DIR) {
-            if (argument_is_index(instruction->op))
-                arg->value = swap_int16(*(short int *)(buf));
-            else
-                arg->value = swap_int32(*(int *)buf);
-        }
+        else
+            arg->value = swap_int32(*(int *)buf);
     }
 }
