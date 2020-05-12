@@ -5,6 +5,7 @@
 ** is_free_prog_nb
 */
 
+#include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include "champion_data.h"
