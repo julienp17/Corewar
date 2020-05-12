@@ -6,6 +6,7 @@
 */
 
 #include "vm.h"
+#include "corewar.h"
 #include "my.h"
 
 static int load_champion(vm_t *vm, int fd, int const champion_nb);
