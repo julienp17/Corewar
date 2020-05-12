@@ -12,11 +12,6 @@
     #include "op.h"
     #include "instruction.h"
 
-    #define HEADER_SIZE         (sizeof(int))                           \
-                                + (sizeof(char) * PROG_NAME_LENGTH)     \
-                                + (sizeof(int))                         \
-                                + (sizeof(char) * COMMENT_LENGTH)       \
-
     typedef struct champion {
         header_t header;
         int nb;
