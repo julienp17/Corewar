@@ -16,13 +16,13 @@ int champion_load_instruction(char mem[MEM_SIZE], champion_t *champion)
 {
     int status = 0;
 
+    champion->pc = champion->pc + champion->instruction->size;
     instruction_reset(champion->instruction);
     status = load_instruction(mem, champion);
     if (status == EXIT_SUCCESS)
         champion->cycle_wait = champion->instruction->op.nbr_cycles;
     else
         champion->cycle_wait = 1;
-    champion->pc = champion->pc + champion->instruction->size;
     return (status);
 }
 
