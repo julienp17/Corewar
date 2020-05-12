@@ -15,7 +15,9 @@
     typedef struct champion {
         header_t header;
         bool is_alive;
+        int nb;
         int cycle_wait;
+        int last_live;
         int registers[REG_NUMBER];
         int pc;
         instruction_t *instruction;

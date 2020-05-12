@@ -41,6 +41,7 @@ static int load_champion(vm_t *vm, int fd, int const champion_nb)
     champion = &(vm->champions[champion_nb - 1]);
     if (champion_load_header(champion, fd) == EXIT_FAILURE)
         return (EXIT_FAILURE);
+    champion->nb = champion_nb;
     champion->registers[0] = champion_nb;
     memchunk_size = MEM_SIZE / vm->nb_champions;
     if (champion->header.prog_size > memchunk_size) {
