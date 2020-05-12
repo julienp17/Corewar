@@ -15,7 +15,7 @@ void vm_dump_mem(vm_t *vm)
     for (int i = 0 ; i < MEM_SIZE ; i += offset) {
         printf("%-4X : ", i);
         for (int j = 0 ; j < offset ; j++)
-            printf(" %02X", vm->mem[i + j]);
+            printf(" %02X", (unsigned char)vm->mem[i + j]);
         printf("\n");
     }
 }
