@@ -27,6 +27,7 @@
 
     vm_t *vm_create(void);
     void vm_destroy(vm_t *vm);
+    void fill_champion(vm_t *vm, get_opt_t *opt);
 
     int vm_load_champion(vm_t *vm, char const *filepath, int const champion_nb);
     void vm_dump(vm_t *vm);
