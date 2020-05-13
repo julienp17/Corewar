@@ -18,17 +18,19 @@
 
     typedef unsigned char uchar;
     typedef struct virtual_machine {
-        int cycle;
         char mem[MEM_SIZE];
         champion_t champions[MAX_CHAMPIONS];
         uchar nb_champions;
         uchar nb_alive;
+        int cycle;
+        int cycle_to_die;
+        int nb_live;
     } vm_t;
 
     vm_t *vm_create(void);
     void vm_destroy(vm_t *vm);
     void fill_champion(vm_t *vm, get_opt_t *opt);
 
-    int vm_load_champion(vm_t *vm, char const *filepath, int const champion_nb);
+    int vm_load_champion(vm_t *vm, champion_t *champion);
     void vm_dump(vm_t *vm);
 #endif
