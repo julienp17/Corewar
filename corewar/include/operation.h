@@ -18,6 +18,9 @@
     int (*operation_get(int const code))(vm_t *, champion_t *);
     int live(vm_t *vm, champion_t *champion);
     int ld(vm_t *vm, champion_t *champion);
+    int st(vm_t *vm, champion_t *champion);
+    int add(vm_t *vm, champion_t *champion);
+    int sub(vm_t *vm, champion_t *champion);
     int zjmp(vm_t *vm, champion_t *champion);
     int sti(vm_t *vm, champion_t *champion);
 #endif
