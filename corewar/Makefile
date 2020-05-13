@@ -47,6 +47,7 @@ OBJ_UT 	 	=	$(SRC_UT:.c=.o)
 SRC_UT_D 	= 	tests/
 SRC_UT_F 	=	test_op_is_null.c \
 				test_op_get_by_code.c \
+				test_champion_is_alive.c \
 
 CFLAGS		=	$(WFLAGS) $(INC) $(LDFLAGS)
 
