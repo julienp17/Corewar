@@ -6,6 +6,7 @@
 */
 
 #include "op.h"
+#include "my.h"
 
 op_t op_tab[] = {
     {"live", 1, {T_DIR}, 1, 10, "alive"},
@@ -32,3 +33,42 @@ op_t op_tab[] = {
     {"aff", 1, {T_REG}, 16, 2, "aff"},
     {0, 0, {0}, 0, 0, 0}
 };
+
+bool op_is_null(op_t op)
+{
+    return (
+        op.mnemonique == 0
+        || op.nbr_args == 0
+        || op.type[0] == 0
+        || op.code == 0
+        || op.nbr_cycles == 0
+        || op.comment == 0
+    );
+}
+
+op_t op_get_by_code(unsigned char code)
+{
+    unsigned int i = 0;
+
+    for (i = 0 ; op_tab[i].code != 0 ; i++)
+        if (op_tab[i].code == code)
+            return (op_tab[i]);
+    return (op_tab[i]);
+}
+
+bool op_has_coding_byte(op_t op)
+{
+    return (op.nbr_args != 1 || op.type[0] != T_DIR);
+}
+
+bool op_modifies_carry(op_t op)
+{
+    int const modifies_carry_opcodes[] = {
+        0x02, 0x04, 0x05, 0x06, 0x07, 0x08, 0x0A, 0x0D, 0x0E, -1
+    };
+
+    for (unsigned int i = 0 ; modifies_carry_opcodes[i] > 0 ; i++)
+        if (op.code == modifies_carry_opcodes[i])
+            return (true);
+    return (false);
+}

@@ -14,13 +14,47 @@ MAIN_F		=	main.c
 SRC			=	$(addprefix $(SRC_D), $(SRC_F))
 OBJ			=	$(SRC:.c=.o)
 SRC_D		=	src/
-SRC_F		=	get_file_size.c \
-				fill_buffer.c \
+
+SRC_F		=	op.c \
+				corewar.c \
+				arguments/argument_is_index.c \
+				arguments/argument_get_size.c \
+				arguments/arguments_are_correct.c \
+				get_opt/my_get_opt.c \
+				get_opt/free_list.c \
+				get_opt/add_info.c 	\
+				get_opt/prog_nb.c 	\
+				get_opt/error_opt.c \
+				get_opt/fill_champion.c \
+				operations/operation_get.c \
+				operations/live.c \
+				operations/ld.c \
+				operations/st.c \
+				operations/add.c \
+				operations/sub.c \
+				operations/zjmp.c \
+				operations/sti.c \
+				structures/champion/champion_is_alive.c \
+				structures/champion/champion_load_header.c \
+				structures/champion/champion_load_instruction.c \
+				structures/champion/champion_execute.c \
+				structures/vm/vm_create.c \
+				structures/vm/vm_destroy.c \
+				structures/vm/vm_load_champion.c \
+				structures/vm/vm_dump.c \
+				structures/instruction/instruction_create.c \
+				structures/instruction/instruction_reset.c \
+				utilities/swap_endianess.c \
+				utilities/get_index.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)
 SRC_UT_D 	= 	tests/
-SRC_UT_F 	=
+SRC_UT_F 	=	test_op_is_null.c \
+				test_op_get_by_code.c \
+				test_champion_is_alive.c \
+				operations/test_sti.c \
+				operations/test_zjmp.c \
 
 CFLAGS		=	$(WFLAGS) $(INC) $(LDFLAGS)
 
