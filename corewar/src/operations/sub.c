@@ -14,6 +14,7 @@ int sub(vm_t *vm, champion_t *champion)
     int add1 = 0;
     int add2 = 0;
 
+    (void)vm;
     reg_nb = champion->instruction->args[0].value;
     add1 = champion->regs[reg_nb - 1];
     reg_nb = champion->instruction->args[1].value;

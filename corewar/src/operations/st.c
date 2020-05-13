@@ -12,7 +12,6 @@ int st(vm_t *vm, champion_t *champion)
 {
     int reg_nb = 0;
     int to_store = 0;
-    int value = 0;
     int address = 0;
 
     reg_nb = champion->instruction->args[0].value;
