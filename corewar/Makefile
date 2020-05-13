@@ -29,6 +29,9 @@ SRC_F		=	op.c \
 				operations/operation_get.c \
 				operations/live.c \
 				operations/ld.c \
+				operations/st.c \
+				operations/add.c \
+				operations/sub.c \
 				operations/zjmp.c \
 				operations/sti.c \
 				structures/champion/champion_is_alive.c \
@@ -42,6 +45,7 @@ SRC_F		=	op.c \
 				structures/instruction/instruction_create.c \
 				structures/instruction/instruction_reset.c \
 				utilities/swap_endianess.c \
+				utilities/get_index.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)
