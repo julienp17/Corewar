@@ -9,20 +9,20 @@
 #include "corewar.h"
 #include "my.h"
 
-static int load_champion(vm_t *vm, int fd, int const champion_nb);
+static int load_champion(vm_t *vm, champion_t *champion, int fd);
 static int put_in_mem(vm_t *vm, champion_t *champion, int fd);
 
-int vm_load_champion(vm_t *vm, char const *filepath, int const champion_nb)
+int vm_load_champion(vm_t *vm, champion_t *champion)
 {
     int fd = 0;
     int status = 0;
 
-    fd = open(filepath, O_RDONLY);
+    fd = open(champion->file_path, O_RDONLY);
     if (fd < 0) {
         my_puterr("Couldn't open file");
         return (EXIT_FAILURE);
     }
-    status = load_champion(vm, fd, champion_nb);
+    status = load_champion(vm, champion, fd);
     if (close(fd) < 0) {
         my_puterr("Couldn't close file");
         status = EXIT_FAILURE;
@@ -30,24 +30,15 @@ int vm_load_champion(vm_t *vm, char const *filepath, int const champion_nb)
     return (status);
 }
 
-static int load_champion(vm_t *vm, int fd, int const champion_nb)
+static int load_champion(vm_t *vm, champion_t *champion, int fd)
 {
-    champion_t *champion = NULL;
-
-    if (champion_nb < 1 || champion_nb > 4) {
-        my_puterr("Champion number not in range 1 to 4.\n");
-        return (EXIT_FAILURE);
-    }
-    champion = &(vm->champions[champion_nb - 1]);
     if (champion_load_header(champion, fd) == EXIT_FAILURE) {
         my_puterr("Champion header load fail.\n");
         return (EXIT_FAILURE);
     }
-    champion->nb = champion_nb;
-    champion->regs[0] = champion_nb;
+    champion->regs[0] = champion->nb;
     if (put_in_mem(vm, champion, fd) == EXIT_FAILURE)
         return (EXIT_FAILURE);
-    champion->is_alive = true;
     champion_load_instruction(vm->mem, champion);
     return (EXIT_SUCCESS);
 }
@@ -57,7 +48,7 @@ static int put_in_mem(vm_t *vm, champion_t *champion, int fd)
     int memchunk_size = 0;
 
     memchunk_size = MEM_SIZE / vm->nb_champions;
-    if (champion->pc == 0)
+    if (champion->pc <= 0)
         champion->pc = (memchunk_size * (champion->nb - 1)) % MEM_SIZE;
     if (champion->header.prog_size > memchunk_size) {
         my_puterr("Program size is too big\n");
