@@ -13,9 +13,11 @@
     #include "instruction.h"
     #include "champion_data.h"
 
+    #define CHAMPION_IS_ALIVE(vm, champion) \
+        (vm->cycle - champion->last_live < vm->cycle_to_die)
+
     typedef struct champion {
         header_t header;
-        bool is_alive;
         char *file_path;
         int nb;
         int cycle_wait;
