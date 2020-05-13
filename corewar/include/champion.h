@@ -11,10 +11,12 @@
     #include <stdbool.h>
     #include "op.h"
     #include "instruction.h"
+    #include "champion_data.h"
 
     typedef struct champion {
         header_t header;
         bool is_alive;
+        char *file_path;
         int nb;
         int cycle_wait;
         int last_live;

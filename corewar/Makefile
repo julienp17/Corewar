@@ -25,6 +25,7 @@ SRC_F		=	op.c \
 				get_opt/add_info.c 	\
 				get_opt/prog_nb.c 	\
 				get_opt/error_opt.c \
+				get_opt/fill_champion.c \
 				operations/operation_get.c \
 				operations/live.c \
 				operations/ld.c \
