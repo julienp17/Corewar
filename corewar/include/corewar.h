@@ -24,5 +24,5 @@
     int champion_execute(vm_t *vm, champion_t *champion);
     int champion_load_instruction(char mem[MEM_SIZE], champion_t *champion);
 
-    int corewar(vm_t *vm, champion_data_t *filepaths);
+    int corewar(vm_t *vm);
 #endif

@@ -14,18 +14,19 @@
 #include "my.h"
 #include "corewar.h"
 
-static char get_nb_alive_champions(vm_t *vm);
 static int run_corewar(vm_t *vm);
+static void update_alive(vm_t *vm);
 
-int corewar(vm_t *vm, champion_data_t *filepaths)
+int corewar(vm_t *vm)
 {
     int status = 0;
+    champion_t *champion = NULL;
 
-    for (int i = 0 ; status == EXIT_SUCCESS && i < vm->nb_champions ; i++) {
-        status = vm_load_champion(vm, filepaths->file_path, filepaths->prog_nb);
+    for (int i = 0 ; i < vm->nb_champions ; i++) {
+        champion = &(vm->champions[i]);
+        status = vm_load_champion(vm, champion);
         if (status == EXIT_FAILURE)
             return (EXIT_FAILURE);
-        filepaths = filepaths->next;
     }
     run_corewar(vm);
     return (EXIT_SUCCESS);
@@ -33,24 +34,34 @@ int corewar(vm_t *vm, champion_data_t *filepaths)
 
 static int run_corewar(vm_t *vm)
 {
-    while (vm->cycle < 65) {
-        champion_execute(vm, &(vm->champions[0]));
+    champion_t *winner = NULL;
+
+    while (vm->nb_alive > 1) {
+        for (int i = 0 ; i < vm->nb_champions ; i++)
+            champion_execute(vm, &(vm->champions[i]));
         vm->cycle++;
+        update_alive(vm);
     }
-    vm_dump(vm);
-    vm->nb_alive = get_nb_alive_champions(vm);
+    for (int i = 0 ; winner == NULL && i < vm->nb_champions ; i++) {
+        winner = &(vm->champions[i]);
+        if (CHAMPION_IS_ALIVE(vm, winner) == false)
+            winner = NULL;
+    }
+    if (winner == NULL)
+        winner = &(vm->champions[0]);
+    printf("The player %d (%s) has won.\n", winner->nb,
+                                            winner->header.prog_name);
     return (EXIT_FAILURE);
 }
 
-static char get_nb_alive_champions(vm_t *vm)
+static void update_alive(vm_t *vm)
 {
-    char nb_alive = 0;
+    champion_t *champion = NULL;
 
-    for (int i = 0 ; i < MAX_CHAMPIONS ; i++) {
-        if (vm->champions[i].nb < 1)
-            continue;
-        if (champion_is_alive(&(vm->champions[i]), vm->cycle))
-            nb_alive++;
+    vm->nb_alive = 0;
+    for (int i = 0 ; i < vm->nb_champions ; i++) {
+        champion = &(vm->champions[i]);
+        if (CHAMPION_IS_ALIVE(vm, champion))
+            vm->nb_alive++;
     }
-    return (nb_alive);
 }

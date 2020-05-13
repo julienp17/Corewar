@@ -24,7 +24,7 @@ int main(int ac, char **av)
         return (84);
     fill_champion(vm, infos);
     vm->nb_alive = vm->nb_champions;
-    status = corewar(vm, infos->prog);
+    status = corewar(vm);
     vm_destroy(vm);
     return (status);
 }
