@@ -22,7 +22,7 @@ int champion_load_instruction(char mem[MEM_SIZE], champion_t *champion)
     if (status == EXIT_SUCCESS)
         champion->cycle_wait = champion->instruction->op.nbr_cycles;
     else
-        champion->cycle_wait = 1;
+        champion->cycle_wait = 2;
     return (status);
 }
 
