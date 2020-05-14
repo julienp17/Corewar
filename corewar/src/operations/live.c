@@ -5,8 +5,8 @@
 ** Execute a 'live' instruction
 */
 
-#include <stdio.h>
 #include "vm.h"
+#include "my.h"
 
 int live(vm_t *vm, proc_t *proc)
 {
@@ -25,7 +25,7 @@ int live(vm_t *vm, proc_t *proc)
         vm->nb_live = 0;
     }
     champion_living->last_live = vm->cycle;
-    printf("The player %d (%s) is alive.\n", champion_living->nb,
+    my_printf("The player %d (%s) is alive.\n", champion_living->nb,
                                         champion_living->header.prog_name);
     return (EXIT_SUCCESS);
 }
