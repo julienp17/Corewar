@@ -49,7 +49,7 @@ static int run_corewar(vm_t *vm)
     }
     if (winner == NULL)
         winner = &(vm->champions[0]);
-    printf("The player %d (%s) has won.\n", winner->nb,
+    my_printf("The player %d (%s) has won.\n", winner->nb,
                                             winner->header.prog_name);
     return (EXIT_FAILURE);
 }

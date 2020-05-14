@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include "my.h"
 #include "champion_data.h"
 
 int free_prog_nb(champion_data_t *my_prog, int nb_test);
@@ -42,7 +43,7 @@ int free_prog_nb(champion_data_t *my_prog, int nb_test)
 void erro_prog_nb(champion_data_t *my_prog, int nb_test)
 {
     if (free_prog_nb(my_prog, nb_test) == -1) {
-        printf("Overlap detected.\n");
+        my_printf("Overlap detected.\n");
         exit(1);
     }
     return;
