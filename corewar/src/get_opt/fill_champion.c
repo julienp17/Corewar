@@ -22,7 +22,7 @@ void fill_champion(vm_t *vm, get_opt_t *opt)
     vm->nb_alive = nb_champion;
     while (tmp != NULL ) {
         vm->champions[i].nb = tmp->prog_nb;
-        vm->champions[i].pc = tmp->load_address;
+        vm->champions[i].proc->pc = tmp->load_address;
         vm->champions[i].file_path = my_strdup(tmp->file_path);
         tmp = tmp->next;
         i++;

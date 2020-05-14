@@ -47,12 +47,8 @@ static void init_mem(char mem[MEM_SIZE])
 static void init_champion(champion_t *champion)
 {
     champion->header = (header_t) {0, {0}, 0, {0}};
-    champion->carry = false;
-    champion->cycle_wait = 0;
-    champion->instruction = instruction_create();
-    champion->pc = 0;
     champion->last_live = 0;
     champion->nb = 0;
-    for (int i = 0 ; i < REG_NUMBER ; i++)
-        champion->regs[i] = 0;
+    champion->nb_proc = 0;
+    champion->proc = proc_create(0);
 }
