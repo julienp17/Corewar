@@ -34,16 +34,16 @@ SRC_F		=	op.c \
 				operations/sub.c \
 				operations/zjmp.c \
 				operations/sti.c \
-				structures/champion/champion_is_alive.c \
 				structures/champion/champion_load_header.c \
-				structures/champion/champion_load_instruction.c \
 				structures/champion/champion_execute.c \
+				structures/proc/proc_create.c \
+				structures/proc/proc_load_instruction.c \
+				structures/instruction/instruction_create.c \
+				structures/instruction/instruction_reset.c \
 				structures/vm/vm_create.c \
 				structures/vm/vm_destroy.c \
 				structures/vm/vm_load_champion.c \
 				structures/vm/vm_dump.c \
-				structures/instruction/instruction_create.c \
-				structures/instruction/instruction_reset.c \
 				utilities/swap_endianess.c \
 				utilities/get_index.c \
 

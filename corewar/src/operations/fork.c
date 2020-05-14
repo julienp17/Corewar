@@ -7,7 +7,7 @@
 
 #include "vm.h"
 
-int fork(vm_t *vm, champion_t *champion)
+int fork(vm_t *vm, proc_t *proc)
 {
     int index = 0;
 

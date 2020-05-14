@@ -7,15 +7,15 @@
 
 #include "vm.h"
 
-int zjmp(vm_t *vm, champion_t *champion)
+int zjmp(vm_t *vm, proc_t *proc)
 {
     int index = 0;
 
     (void)vm;
-    if (champion->carry == false)
+    if (proc->carry == false)
         return (EXIT_FAILURE);
-    index = get_index(champion->pc, champion->instruction->args[0].value);
-    champion->pc = index;
-    champion->instruction->size = 0;
+    index = get_index(proc->pc, proc->instruction->args[0].value);
+    proc->pc = index;
+    proc->instruction->size = 0;
     return (EXIT_SUCCESS);
 }

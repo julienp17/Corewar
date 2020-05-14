@@ -13,6 +13,7 @@
     #include <fcntl.h>
     #include "op.h"
     #include "champion.h"
+    #include "champion_data.h"
 
     #define MAX_CHAMPIONS          4
 
