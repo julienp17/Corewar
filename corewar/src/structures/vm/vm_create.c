@@ -11,7 +11,7 @@
 
 static void init_vars(vm_t *vm);
 static void init_mem(char mem[MEM_SIZE]);
-static void init_champions(champion_t champions[MAX_CHAMPIONS]);
+static void init_champion(champion_t *champion);
 
 vm_t *vm_create(void)
 {
@@ -24,7 +24,8 @@ vm_t *vm_create(void)
     }
     init_vars(vm);
     init_mem(vm->mem);
-    init_champions(vm->champions);
+    for (int i = 0 ; i < MAX_CHAMPIONS ; i++)
+        init_champion(&(vm->champions[i]));
     return (vm);
 }
 
@@ -43,17 +44,15 @@ static void init_mem(char mem[MEM_SIZE])
         mem[i] = 0;
 }
 
-static void init_champions(champion_t champions[MAX_CHAMPIONS])
+static void init_champion(champion_t *champion)
 {
-    for (int i = 0 ; i < MAX_CHAMPIONS ; i++) {
-        champions[i].header = (header_t) {0, {0}, 0, {0}};
-        champions[i].carry = false;
-        champions[i].cycle_wait = 0;
-        champions[i].instruction = instruction_create();
-        champions[i].pc = 0;
-        champions[i].last_live = 0;
-        champions[i].nb = 0;
-        for (int j = 0 ; j < REG_NUMBER ; j++)
-            champions[i].regs[i] = 0;
-    }
+    champion->header = (header_t) {0, {0}, 0, {0}};
+    champion->carry = false;
+    champion->cycle_wait = 0;
+    champion->instruction = instruction_create();
+    champion->pc = 0;
+    champion->last_live = 0;
+    champion->nb = 0;
+    for (int i = 0 ; i < REG_NUMBER ; i++)
+        champion->regs[i] = 0;
 }
