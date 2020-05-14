@@ -21,5 +21,5 @@ int add(vm_t *vm, champion_t *champion)
     add2 = champion->regs[reg_nb - 1];
     reg_nb = champion->instruction->args[2].value;
     champion->regs[reg_nb - 1] = add1 + add2;
-    return (EXIT_SUCCESS);
+    return (champion->regs[reg_nb - 1]);
 }

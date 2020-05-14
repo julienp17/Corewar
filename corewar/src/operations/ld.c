@@ -16,5 +16,5 @@ int ld(vm_t *vm, champion_t *champion)
     value  = champion->instruction->args[0].value;
     reg_nb = champion->instruction->args[1].value;
     champion->regs[reg_nb - 1] = value;
-    return (EXIT_SUCCESS);
+    return (champion->regs[reg_nb - 1]);
 }
