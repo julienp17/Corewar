@@ -34,6 +34,9 @@ SRC_F		=	op.c \
 				operations/sub.c \
 				operations/zjmp.c \
 				operations/sti.c \
+				operations/and.c \
+				operations/or.c \
+				operations/xor.c \
 				structures/champion/champion_load_header.c \
 				structures/champion/champion_execute.c \
 				structures/proc/proc_create.c \
