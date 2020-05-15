@@ -38,6 +38,8 @@ SRC_F		=	op.c \
 				operations/zjmp.c \
 				operations/sti.c \
 				operations/fork.c \
+				operations/lld.c \
+				operations/lfork.c \
 				operations/aff.c \
 				structures/champion/champion_load_header.c \
 				structures/champion/champion_execute.c \
@@ -52,6 +54,7 @@ SRC_F		=	op.c \
 				structures/vm/vm_dump.c \
 				utilities/swap_endianess.c \
 				utilities/get_index.c \
+				utilities/mem_manipulation.c \
 
 SRC_UT   	=	$(addprefix $(SRC_UT_D), $(SRC_UT_F))
 OBJ_UT 	 	=	$(SRC_UT:.c=.o)
