@@ -35,13 +35,14 @@ int corewar(vm_t *vm)
 
 static void run_corewar(vm_t *vm)
 {
-    while (vm->nb_alive > 1) {
+    while (vm_should_continue(vm)) {
         for (int i = 0 ; i < vm->nb_champions ; i++)
             champion_execute(vm, &(vm->champions[i]));
         vm->cycle++;
         update_alive(vm);
     }
-    vm_dump(vm);
+    if (vm->cycle_to_dump != -1)
+        vm_dump(vm);
     announce_winner(vm);
 }
 
@@ -61,13 +62,12 @@ static void announce_winner(vm_t *vm)
 {
     champion_t *winner = NULL;
 
-    for (int i = 0 ; winner == NULL && i < vm->nb_champions ; i++) {
-        winner = &(vm->champions[i]);
-        if (CHAMPION_IS_ALIVE(vm, winner) == false)
-            winner = NULL;
+    winner = &(vm->champions[0]);
+    for (int i = 1 ; i < vm->nb_champions ; i++) {
+        if (winner->last_live < vm->champions[i].last_live)
+            winner = &(vm->champions[i]);
     }
-    if (winner == NULL)
-        winner = &(vm->champions[0]);
-    my_printf("The player %d (%s) has won.\n", winner->nb,
+    if (winner->last_live > 0)
+        my_printf("The player %d (%s) has won.\n", winner->nb,
                                             winner->header.prog_name);
 }

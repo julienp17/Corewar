@@ -7,11 +7,11 @@
 
 #include "op.h"
 
-int get_index(int const pc, int const value)
+int get_index(int const pc, int const value, int flag)
 {
     int index = 0;
 
-    if (value > 0)
+    if (flag == IDX_MOD && value > 0)
         index = pc + value % IDX_MOD;
     else
         index = pc + value;

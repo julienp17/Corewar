@@ -14,7 +14,7 @@ int zjmp(vm_t *vm, proc_t *proc)
     (void)vm;
     if (proc->carry == false)
         return (EXIT_FAILURE);
-    index = get_index(proc->pc, proc->instruction->args[0].value);
+    index = get_index(proc->pc, proc->instruction->args[0].value, IDX_MOD);
     proc->pc = index;
     proc->instruction->size = 0;
     return (EXIT_SUCCESS);
