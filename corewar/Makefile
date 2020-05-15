@@ -63,6 +63,7 @@ SRC_UT_F 	=	test_op_is_null.c \
 				operations/test_or.c \
 				operations/test_xor.c \
 				test_swap_endianess.c \
+				test_champion_load_header.c \
 				#test_champion_is_alive.c \
 				#operations/test_sti.c \
 
