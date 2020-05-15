@@ -70,21 +70,15 @@ static void fill_arg_value(char mem[MEM_SIZE], proc_t *proc, arg_t *arg)
 {
     char buf[sizeof(int)] = {0, 0, 0, 0};
     int address = 0;
-    int value = 0;
 
-    for (int j = 0 ; j < arg->size ; j++) {
+    for (int i = 0 ; i < arg->size ; i++) {
         address = (proc->pc + proc->instruction->size++) % MEM_SIZE;
-        buf[j] = mem[address];
+        buf[i] = mem[address];
     }
     if (arg->type == T_REG)
         arg->value = buf[0];
-    if (arg->type == T_IND) {
-        value = swap_int16(*(short int *)(buf));
-        for (int i = 0 ; i < REG_SIZE ; i++) {
-            address = get_index(proc->pc, value + i, 0);
-            arg->value = (arg->value << 8) + mem[address];
-        }
-    }
+    if (arg->type == T_IND)
+        arg->value = swap_int16(*(short int *)(buf));
     if (arg->type == T_DIR) {
         if (argument_is_index(proc->instruction->op))
             arg->value = swap_int16(*(short int *)(buf));
