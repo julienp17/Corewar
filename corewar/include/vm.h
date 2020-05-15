@@ -39,5 +39,5 @@
 
     int get_index(int const pc, int const value, int flag);
     int get_mem_value(char mem[MEM_SIZE], int address);
-    void set_mem_value(char mem[MEM_SIZE], int address, int value);
+    void set_mem_value(char mem[MEM_SIZE], int address, char value);
 #endif
