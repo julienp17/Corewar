@@ -19,10 +19,12 @@ int proc_load_instruction(char mem[MEM_SIZE], proc_t *proc)
     proc->pc = (proc->pc + proc->instruction->size) % MEM_SIZE;
     instruction_reset(proc->instruction);
     status = load_instruction(mem, proc);
-    if (status == EXIT_SUCCESS)
+    if (status == EXIT_SUCCESS) {
         proc->cycle_wait = proc->instruction->op.nbr_cycles;
-    else
+    } else {
         proc->cycle_wait = 2;
+        proc->pc = (proc->pc + 1) % MEM_SIZE;
+    }
     return (status);
 }
 
