@@ -13,8 +13,8 @@ int (*operation_get(int const code))(vm_t *, proc_t *)
     operation_t operations[] = {
         {1, &live}, {2, &ld}, {3, &st}, {4, &add}, {5, &sub},
         {6, &and}, {7, &or}, {8, &xor}, {9, &zjmp}, {11, &sti},
-        {12, &proc_fork}, {16, &aff},
-        {-1, 0}
+        {12, &proc_fork}, {13, &lld}, {15, &proc_lfork},
+        {16, &aff}, {-1, 0}
     };
 
     for (unsigned int i = 0 ; operations[i].code > 0 && operation == NULL ; i++)
