@@ -41,7 +41,6 @@ static void run_corewar(vm_t *vm)
         vm->cycle++;
         update_alive(vm);
     }
-    vm_dump(vm);
     announce_winner(vm);
 }
 

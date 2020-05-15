@@ -15,5 +15,5 @@ char argument_get_size(char const arg_type, op_t op)
         return (IND_SIZE);
     if (arg_type == T_DIR)
         return (argument_is_index(op) ? IND_SIZE : DIR_SIZE);
-    return (-1);
+    return (0);
 }
