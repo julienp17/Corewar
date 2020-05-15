@@ -61,13 +61,14 @@ SRC_UT_F 	=	test_op_is_null.c \
 				arguments/test_argument_get_size.c \
 				arguments/test_argument_is_index.c \
 				operations/test_st.c \
-				operations/test_ld.c \
 				operations/test_add.c \
 				operations/test_sub.c \
 				operations/test_zjmp.c \
 				operations/test_and.c \
 				operations/test_or.c \
 				operations/test_xor.c \
+				test_champion_load_header.c \
+				#operations/test_ld.c \
 
 CFLAGS		=	$(WFLAGS) $(INC) $(LDFLAGS)
 
