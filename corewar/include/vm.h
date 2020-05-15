@@ -33,6 +33,7 @@
     void vm_destroy(vm_t *vm);
     void fill_champion(vm_t *vm, get_opt_t *opt);
 
+    bool vm_should_continue(vm_t *vm);
     int get_index(int const pc, int const value);
     int vm_load_champion(vm_t *vm, champion_t *champion);
     void vm_dump(vm_t *vm);

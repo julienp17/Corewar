@@ -48,6 +48,7 @@ SRC_F		=	op.c \
 				structures/vm/vm_create.c \
 				structures/vm/vm_destroy.c \
 				structures/vm/vm_load_champion.c \
+				structures/vm/vm_should_continue.c \
 				structures/vm/vm_dump.c \
 				utilities/swap_endianess.c \
 				utilities/get_index.c \
