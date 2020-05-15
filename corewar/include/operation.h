@@ -21,10 +21,10 @@
     int st(vm_t *vm, proc_t *proc);
     int add(vm_t *vm, proc_t *proc);
     int sub(vm_t *vm, proc_t *proc);
-    int zjmp(vm_t *vm, proc_t *proc);
-    int sti(vm_t *vm, proc_t *proc);
     int and(vm_t *vm, proc_t *proc);
     int or(vm_t *vm, proc_t *proc);
     int xor(vm_t *vm, proc_t *proc);
-
+    int zjmp(vm_t *vm, proc_t *proc);
+    int sti(vm_t *vm, proc_t *proc);
+    int proc_fork(vm_t *vm, proc_t *proc);
 #endif
