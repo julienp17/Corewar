@@ -25,6 +25,7 @@
         uchar nb_alive;
         int cycle;
         int cycle_to_die;
+        int cycle_to_dump;
         int nb_live;
     } vm_t;
 

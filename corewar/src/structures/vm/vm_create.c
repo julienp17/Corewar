@@ -33,6 +33,7 @@ static void init_vars(vm_t *vm)
 {
     vm->cycle = 0;
     vm->cycle_to_die = CYCLE_TO_DIE;
+    vm->cycle_to_dump = 0;
     vm->nb_champions = 0;
     vm->nb_alive = 0;
     vm->nb_live = 0;
