@@ -20,8 +20,10 @@ int st(vm_t *vm, proc_t *proc)
         reg_nb = proc->instruction->args[1].value;
         proc->regs[reg_nb - 1] = to_store;
     } else if (proc->instruction->args[1].type == T_IND) {
-        address = get_index(proc->pc, proc->instruction->args[1].value);
-        vm->mem[address] = to_store;
+        for (int i = 0 ; i < REG_NUMBER ; i++) {
+            address = (proc->instruction->args[1].value + i) % MEM_SIZE;
+            vm->mem[address] = (to_store >> (8 * (3 - i))) & 0xFF;
+        }
     }
     return (EXIT_SUCCESS);
 }
