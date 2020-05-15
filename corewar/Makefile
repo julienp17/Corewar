@@ -34,6 +34,9 @@ SRC_F		=	op.c \
 				operations/sub.c \
 				operations/zjmp.c \
 				operations/sti.c \
+				operations/and.c \
+				operations/or.c \
+				operations/xor.c \
 				structures/champion/champion_load_header.c \
 				structures/champion/champion_execute.c \
 				structures/proc/proc_create.c \
@@ -56,6 +59,9 @@ SRC_UT_F 	=	test_op_is_null.c \
 				operations/test_add.c \
 				operations/test_sub.c \
 				operations/test_zjmp.c \
+				operations/test_and.c \
+				operations/test_or.c \
+				operations/test_xor.c \
 				#test_champion_is_alive.c \
 				#operations/test_sti.c \
 

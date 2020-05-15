@@ -19,12 +19,12 @@ int vm_load_champion(vm_t *vm, champion_t *champion)
 
     fd = open(champion->file_path, O_RDONLY);
     if (fd < 0) {
-        my_puterr("Couldn't open file");
+        my_puterr("Couldn't open file.\n");
         return (EXIT_FAILURE);
     }
     status = load_champion(vm, champion, fd);
     if (close(fd) < 0) {
-        my_puterr("Couldn't close file");
+        my_puterr("Couldn't close file.\n");
         status = EXIT_FAILURE;
     }
     return (status);
