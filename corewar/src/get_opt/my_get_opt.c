@@ -53,3 +53,24 @@ int add_prog_infos(char **av, int i , get_opt_t *opt)
     tmp->next = add;
     return (i);
 }
+
+get_opt_t *my_get_opt(char **av)
+{
+    get_opt_t *opt = NULL;
+
+    opt = malloc(sizeof(get_opt_t));
+    opt->prog = NULL;
+    opt->nb_cycle = -1;
+    for (int i = 1; av[i]; i++) {
+        if ((!my_strcmp("-dump", av[i])) || (!my_strcmp("-d", av[i]))) {
+            opt->nb_cycle = my_atoi(av[(i + 1)]);
+            error_cycle(opt->nb_cycle);
+            i += 2;
+        }
+        if (av[i] == NULL)
+            break;
+        i = add_prog_infos(av, i, opt);
+    }
+    error_arg(opt);
+    return (opt);
+}
