@@ -9,21 +9,34 @@
 #include "corewar.h"
 #include "operation.h"
 
-int champion_execute(vm_t *vm, champion_t *champion)
+static int execute_operation(vm_t *vm, proc_t *proc);
+
+void champion_execute(vm_t *vm, champion_t *champion)
 {
-    int (*operation)(vm_t *, champion_t *) = NULL;
+    proc_t *proc = NULL;
+
+    proc = champion->proc;
+    while (proc != NULL) {
+        execute_operation(vm, proc);
+        proc = proc->next;
+    }
+}
+
+static int execute_operation(vm_t *vm, proc_t *proc)
+{
+    int (*operation)(vm_t *, proc_t *) = NULL;
     int status = 0;
 
-    if (champion->cycle_wait > 0) {
-        champion->cycle_wait--;
+    if (proc->cycle_wait > 1) {
+        proc->cycle_wait--;
         return (EXIT_SUCCESS);
     }
-    operation = operation_get(champion->instruction->op.code);
+    operation = operation_get(proc->instruction->op.code);
     if (operation) {
-        status = operation(vm, champion);
-        if (op_modifies_carry(champion->instruction->op))
-            champion->carry = (status == EXIT_SUCCESS) ? true : false;
+        status = operation(vm, proc);
+        if (op_modifies_carry(proc->instruction->op))
+            proc->carry = (status == 0);
     }
-    status = champion_load_instruction(vm->mem, champion);
+    status = proc_load_instruction(vm->mem, proc);
     return (status);
 }

@@ -10,8 +10,7 @@
 
     #include <stdbool.h>
     #include "op.h"
-    #include "instruction.h"
-    #include "champion_data.h"
+    #include "proc.h"
 
     #define CHAMPION_IS_ALIVE(vm, champion) \
         (vm->cycle - champion->last_live < vm->cycle_to_die)
@@ -20,14 +19,10 @@
         header_t header;
         char *file_path;
         int nb;
-        int cycle_wait;
         int last_live;
-        int regs[REG_NUMBER];
-        int pc;
-        instruction_t *instruction;
-        bool carry;
+        int nb_proc;
+        struct process *proc;
     } champion_t;
 
-    bool champion_is_alive(champion_t *champion, int cycle);
     int champion_load_header(champion_t *champion, int fd);
 #endif

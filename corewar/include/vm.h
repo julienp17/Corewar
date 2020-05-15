@@ -13,6 +13,7 @@
     #include <fcntl.h>
     #include "op.h"
     #include "champion.h"
+    #include "champion_data.h"
 
     #define MAX_CHAMPIONS          4
 
@@ -31,6 +32,7 @@
     void vm_destroy(vm_t *vm);
     void fill_champion(vm_t *vm, get_opt_t *opt);
 
+    int get_index(int const pc, int const value);
     int vm_load_champion(vm_t *vm, champion_t *champion);
     void vm_dump(vm_t *vm);
 #endif

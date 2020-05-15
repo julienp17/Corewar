@@ -5,17 +5,17 @@
 ** Dump the memory of the vm
 */
 
-#include <stdio.h>
 #include "vm.h"
+#include "my.h"
 
 void vm_dump(vm_t *vm)
 {
     int const offset = 0x20;
 
     for (int i = 0 ; i < MEM_SIZE ; i += offset) {
-        printf("%-4X : ", i);
+        my_printf("%-4X : ", i);
         for (int j = 0 ; j < offset ; j++)
-            printf("%02X ", (unsigned char)vm->mem[i + j]);
-        printf("\n");
+            my_printf("%02X ", (unsigned char)vm->mem[i + j]);
+        my_printf("\n");
     }
 }

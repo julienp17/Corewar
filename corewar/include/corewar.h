@@ -21,8 +21,7 @@
     bool op_modifies_carry(op_t op);
     bool op_is_null(op_t op);
 
-    int champion_execute(vm_t *vm, champion_t *champion);
-    int champion_load_instruction(char mem[MEM_SIZE], champion_t *champion);
+    void champion_execute(vm_t *vm, champion_t *champion);
 
     int corewar(vm_t *vm);
 #endif

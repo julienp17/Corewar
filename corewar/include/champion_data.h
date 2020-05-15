@@ -11,6 +11,10 @@
 #ifndef FILE_INFO_H_
 #define FILE_INFO_H_
 
+#define USAGE \
+    "Usage: ./corewar [-dump cycle_nb] [[-a load_addr] [-n prog_nb] prog.cor]" \
+    " ...\n"
+
 enum error_arg {
     INVALID_OPTION = -1,
     INVALID_NB_CHAMP = -2,

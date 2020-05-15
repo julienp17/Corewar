@@ -7,22 +7,15 @@
 
 #include "vm.h"
 
-int zjmp(vm_t *vm, champion_t *champion)
+int zjmp(vm_t *vm, proc_t *proc)
 {
-    int value = 0;
+    int index = 0;
 
     (void)vm;
-    if (champion->carry == false)
+    if (proc->carry == false)
         return (EXIT_FAILURE);
-    value = champion->instruction->args[0].value;
-    if (value > 0)
-        champion->pc += value % IDX_MOD;
-    else
-        champion->pc += value;
-    if (champion->pc < 0)
-        champion->pc += MEM_SIZE;
-    else if (champion->pc > MEM_SIZE)
-        champion->pc %= MEM_SIZE;
-    champion->instruction->size = 0;
+    index = get_index(proc->pc, proc->instruction->args[0].value);
+    proc->pc = index;
+    proc->instruction->size = 0;
     return (EXIT_SUCCESS);
 }

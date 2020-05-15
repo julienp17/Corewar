@@ -7,11 +7,12 @@
 
 #include "operation.h"
 
-int (*operation_get(int const code))(vm_t *, champion_t *)
+int (*operation_get(int const code))(vm_t *, proc_t *)
 {
-    int (*operation)(vm_t *, champion_t *) = NULL;
+    int (*operation)(vm_t *, proc_t *) = NULL;
     operation_t operations[] = {
-        {1, &live}, {2, &ld}, {9, &zjmp}, {11, &sti},
+        {1, &live}, {2, &ld}, {3, &st}, {4, &add}, {5, &sub},
+        {9, &zjmp}, {11, &sti},
         {-1, 0}
     };
 

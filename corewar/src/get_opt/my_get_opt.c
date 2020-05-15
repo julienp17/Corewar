@@ -10,8 +10,6 @@
 #include "my.h"
 #include "champion_data.h"
 
-void display_prog(get_opt_t *opt);
-
 int add_elements(champion_data_t *add, int i, char **av, get_opt_t *opt)
 {
     if (av[i] != NULL && (!my_strcmp("-a", av[i]))) {
@@ -65,18 +63,5 @@ get_opt_t *my_get_opt(char **av)
         i = add_prog_infos(av, i, opt);
     }
     error_arg(opt);
-    // display_prog(opt);
-    // free_list(opt->prog);
     return (opt);
-}
-
-void display_prog(get_opt_t *opt)
-{
-    printf("DISPLAY:\n");
-    while (opt->prog) {
-        printf("opt->prog->prog_nb = [%d]\n", opt->prog->prog_nb);
-        printf("opt->prog->load_address = [%d]\n", opt->prog->load_address);
-        printf("opt->prog->file_path = [%s]\n\n\n\n", opt->prog->file_path);
-        opt->prog = opt->prog->next;
-    }
 }

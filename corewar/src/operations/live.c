@@ -5,15 +5,15 @@
 ** Execute a 'live' instruction
 */
 
-#include <stdio.h>
 #include "vm.h"
+#include "my.h"
 
-int live(vm_t *vm, champion_t *champion)
+int live(vm_t *vm, proc_t *proc)
 {
     int player_nb = 0;
     champion_t *champion_living = NULL;
 
-    player_nb = champion->instruction->args[0].value;
+    player_nb = proc->instruction->args[0].value;
     for (int i = 0 ; champion_living == NULL && i < vm->nb_champions ; i++)
         if (player_nb == vm->champions[i].nb)
             champion_living = &(vm->champions[i]);
@@ -25,7 +25,7 @@ int live(vm_t *vm, champion_t *champion)
         vm->nb_live = 0;
     }
     champion_living->last_live = vm->cycle;
-    printf("The player %d (%s) is alive.\n", champion_living->nb,
+    my_printf("The player %d (%s) is alive.\n", champion_living->nb,
                                         champion_living->header.prog_name);
     return (EXIT_SUCCESS);
 }
