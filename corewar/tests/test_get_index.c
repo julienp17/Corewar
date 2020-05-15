@@ -8,36 +8,36 @@
 #include <criterion/criterion.h>
 #include "corewar.h"
 
-Test(get_index, normal_index_forward)
+Test(get_index, normal_index_forward_with_idx_mod)
 {
     int pc = 12;
     int value = 14;
     int index = 0;
     int const expected = pc + value;
 
-    index = get_index(pc, value);
+    index = get_index(pc, value, IDX_MOD);
     cr_assert_eq(index, expected);
 }
 
-Test(get_index, normal_index_backward)
+Test(get_index, normal_index_backward_with_idx_mod)
 {
     int pc = 12;
     int value = -8;
     int index = 0;
     int const expected = pc + value;
 
-    index = get_index(pc, value);
+    index = get_index(pc, value, IDX_MOD);
     cr_assert_eq(index, expected);
 }
 
-Test(get_index, value_eq_zero)
+Test(get_index, value_eq_zero_with_idx_mod)
 {
     int pc = 18;
     int value = 0;
     int index = 0;
     int const expected = pc;
 
-    index = get_index(pc, value);
+    index = get_index(pc, value, IDX_MOD);
     cr_assert_eq(index, expected);
 }
 
@@ -48,7 +48,7 @@ Test(get_index, value_greater_than_idx_mod)
     int index = 0;
     int const expected = value % IDX_MOD;
 
-    index = get_index(pc, value);
+    index = get_index(pc, value, IDX_MOD);
     cr_assert_eq(index, expected);
 }
 
@@ -59,7 +59,7 @@ Test(get_index, pc_plus_value_greater_than_mem)
     int index = 0;
     int const expected = 2;
 
-    index = get_index(pc, value);
+    index = get_index(pc, value, IDX_MOD);
     cr_assert_eq(index, expected);
 }
 
@@ -70,6 +70,6 @@ Test(get_index, value_negative_mem)
     int index = 0;
     int const expected = MEM_SIZE - 4;
 
-    index = get_index(pc, value);
+    index = get_index(pc, value, IDX_MOD);
     cr_assert_eq(index, expected);
 }

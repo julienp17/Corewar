@@ -81,7 +81,7 @@ static void fill_arg_value(char mem[MEM_SIZE], proc_t *proc, arg_t *arg)
     if (arg->type == T_IND) {
         value = swap_int16(*(short int *)(buf));
         for (int i = 0 ; i < REG_SIZE ; i++) {
-            address = get_index(proc->pc, value + i);
+            address = get_index(proc->pc, value + i, 0);
             arg->value = (arg->value << 8) + mem[address];
         }
     }

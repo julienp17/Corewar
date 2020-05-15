@@ -23,7 +23,7 @@ int sti(vm_t *vm, proc_t *proc)
         value  = (char)value;
     offset = get_total_offset(proc->instruction->args, proc->regs);
     for (unsigned long int i = 0 ; i < sizeof(int) ; i++) {
-        address = get_index(proc->pc, offset + i);
+        address = get_index(proc->pc, offset + i, IDX_MOD);
         vm->mem[address] = (value >> (8 * (3 - i))) & 0xFF;
     }
     return (EXIT_SUCCESS);
