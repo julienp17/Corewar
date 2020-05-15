@@ -38,6 +38,7 @@ SRC_F		=	op.c \
 				operations/zjmp.c \
 				operations/sti.c \
 				operations/fork.c \
+				operations/aff.c \
 				structures/champion/champion_load_header.c \
 				structures/champion/champion_execute.c \
 				structures/proc/proc_create.c \
@@ -60,6 +61,7 @@ SRC_UT_F 	=	test_op_is_null.c \
 				arguments/test_argument_get_size.c \
 				arguments/test_argument_is_index.c \
 				operations/test_st.c \
+				operations/test_ld.c \
 				operations/test_add.c \
 				operations/test_sub.c \
 				operations/test_zjmp.c \
