@@ -18,3 +18,11 @@ int get_mem_value(char mem[MEM_SIZE], int address)
     }
     return (value);
 }
+
+void set_mem_value(char mem[MEM_SIZE], int address, int value)
+{
+    for (int i = 0 ; i < REG_SIZE ; i++) {
+        mem[address] = (value >> (8 * (3 - i))) & 0xFF;
+        address = (address + 1) % MEM_SIZE;
+    }
+}
