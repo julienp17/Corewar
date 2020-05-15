@@ -16,7 +16,7 @@ int proc_load_instruction(char mem[MEM_SIZE], proc_t *proc)
 {
     int status = 0;
 
-    proc->pc += proc->instruction->size;
+    proc->pc = (proc->pc + proc->instruction->size) % MEM_SIZE;
     instruction_reset(proc->instruction);
     status = load_instruction(mem, proc);
     if (status == EXIT_SUCCESS)
@@ -68,6 +68,7 @@ static void fill_arg_value(char mem[MEM_SIZE], proc_t *proc, arg_t *arg)
 {
     char buf[sizeof(int)] = {0, 0, 0, 0};
     int address = 0;
+    int value = 0;
 
     for (int j = 0 ; j < arg->size ; j++) {
         address = (proc->pc + proc->instruction->size++) % MEM_SIZE;
@@ -76,8 +77,11 @@ static void fill_arg_value(char mem[MEM_SIZE], proc_t *proc, arg_t *arg)
     if (arg->type == T_REG)
         arg->value = buf[0];
     if (arg->type == T_IND) {
-        arg->value = swap_int16(*(short int *)(buf));
-        arg->value = (proc->pc + arg->value % IDX_MOD) % MEM_SIZE;
+        value = swap_int16(*(short int *)(buf));
+        for (int i = 0 ; i < REG_SIZE ; i++) {
+            address = get_index(proc->pc, value + i);
+            arg->value = (arg->value << 8) + mem[address];
+        }
     }
     if (arg->type == T_DIR) {
         if (argument_is_index(proc->instruction->op))
