@@ -12,13 +12,19 @@
 
 int add_elements(champion_data_t *add, int i, char **av, get_opt_t *opt)
 {
+    if (av[i] != NULL && ((!my_strcmp("-dump", av[i]))
+        || (!my_strcmp("-d", av[i])))) {
+        opt->nb_cycle = my_atoi(av[(i + 1)]);
+        error_cycle(opt->nb_cycle);
+        i += 2;
+    }
     if (av[i] != NULL && (!my_strcmp("-a", av[i]))) {
         i = elem_add_a(add, av, i, opt);
     }
     else if (av[i] != NULL && (!my_strcmp("-n", av[i]))) {
         i = elem_add_n(add, av, i, opt);
     }
-    else {
+    else if (av[i] != NULL) {
         i = elem_add_std(add, av, i, opt);
     }
     return (i);
@@ -59,6 +65,9 @@ get_opt_t *my_get_opt(char **av)
             opt->nb_cycle = my_atoi(av[(i + 1)]);
             error_cycle(opt->nb_cycle);
             i += 2;
+        }
+        if (av[i] == NULL) {
+            break;
         }
         i = add_prog_infos(av, i, opt);
     }
