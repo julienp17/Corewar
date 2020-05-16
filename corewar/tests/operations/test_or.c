@@ -14,6 +14,9 @@ Test(or, simple_or_operation)
     int expected = 13;
     proc_t *process = proc_create(0);
 
+    process->instruction->args[0].type = T_REG;
+    process->instruction->args[1].type = T_REG;
+    process->instruction->args[2].type = T_REG;
     process->instruction->args[0].value = 2;
     process->instruction->args[1].value = 3;
     process->instruction->args[2].value = 4;
@@ -30,6 +33,9 @@ Test(or, or_with_two_negative)
     int expected = -5;
     proc_t *process = proc_create(0);
 
+    process->instruction->args[0].type = T_REG;
+    process->instruction->args[1].type = T_REG;
+    process->instruction->args[2].type = T_REG;
     process->instruction->args[0].value = 2;
     process->instruction->args[1].value = 3;
     process->instruction->args[2].value = 4;
@@ -46,6 +52,9 @@ Test(or, or_with_one_negative)
     int expected = -90;
     proc_t *process = proc_create(0);
 
+    process->instruction->args[0].type = T_REG;
+    process->instruction->args[1].type = T_REG;
+    process->instruction->args[2].type = T_REG;
     process->instruction->args[0].value = 2;
     process->instruction->args[1].value = 3;
     process->instruction->args[2].value = 4;
@@ -62,6 +71,9 @@ Test(or, or_with_big_numbers)
     int expected = 1007263;
     proc_t *process = proc_create(0);
 
+    process->instruction->args[0].type = T_REG;
+    process->instruction->args[1].type = T_REG;
+    process->instruction->args[2].type = T_REG;
     process->instruction->args[0].value = 2;
     process->instruction->args[1].value = 3;
     process->instruction->args[2].value = 4;

@@ -14,6 +14,9 @@ Test(and, simple_and_operation)
     int expected = 4;
     proc_t *process = proc_create(0);
 
+    process->instruction->args[0].type = T_REG;
+    process->instruction->args[1].type = T_REG;
+    process->instruction->args[2].type = T_REG;
     process->instruction->args[0].value = 2;
     process->instruction->args[1].value = 3;
     process->instruction->args[2].value = 4;
@@ -30,6 +33,9 @@ Test(and, and_with_two_negative)
     int expected = -8;
     proc_t *process = proc_create(0);
 
+    process->instruction->args[0].type = T_REG;
+    process->instruction->args[1].type = T_REG;
+    process->instruction->args[2].type = T_REG;
     process->instruction->args[0].value = 2;
     process->instruction->args[1].value = 3;
     process->instruction->args[2].value = 4;
@@ -46,6 +52,9 @@ Test(and, and_with_one_negative)
     int expected = -30;
     proc_t *process = proc_create(0);
 
+    process->instruction->args[0].type = T_REG;
+    process->instruction->args[1].type = T_REG;
+    process->instruction->args[2].type = T_REG;
     process->instruction->args[0].value = 2;
     process->instruction->args[1].value = 3;
     process->instruction->args[2].value = 4;
@@ -62,6 +71,9 @@ Test(and, and_with_big_numbers)
     int expected = 4786;
     proc_t *process = proc_create(0);
 
+    process->instruction->args[0].type = T_REG;
+    process->instruction->args[1].type = T_REG;
+    process->instruction->args[2].type = T_REG;
     process->instruction->args[0].value = 2;
     process->instruction->args[1].value = 3;
     process->instruction->args[2].value = 4;
