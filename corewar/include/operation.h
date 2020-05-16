@@ -25,6 +25,7 @@
     int or(vm_t *vm, proc_t *proc);
     int xor(vm_t *vm, proc_t *proc);
     int zjmp(vm_t *vm, proc_t *proc);
+    int ldi(vm_t *vm, proc_t *proc);
     int sti(vm_t *vm, proc_t *proc);
     int proc_fork(vm_t *vm, proc_t *proc);
     int lld(vm_t *vm, proc_t *proc);

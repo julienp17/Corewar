@@ -37,9 +37,11 @@ SRC_F		=	op.c \
 				operations/or.c \
 				operations/xor.c \
 				operations/zjmp.c \
+				operations/ldi.c \
 				operations/sti.c \
 				operations/fork.c \
 				operations/lld.c \
+				operations/lldi.c \
 				operations/lfork.c \
 				operations/aff.c \
 				structures/champion/champion_load_header.c \
