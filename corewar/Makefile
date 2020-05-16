@@ -20,6 +20,7 @@ SRC_F		=	op.c \
 				arguments/argument_is_index.c \
 				arguments/argument_get_size.c \
 				arguments/arguments_are_correct.c \
+				arguments/argument_get_value.c \
 				get_opt/my_get_opt.c \
 				get_opt/free_list.c \
 				get_opt/add_info.c 	\
