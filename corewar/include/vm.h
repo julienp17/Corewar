@@ -41,5 +41,5 @@
     int argument_get_value(char mem[MEM_SIZE], proc_t *proc, int arg_nb,
                             int flag);
     int get_mem_value(char mem[MEM_SIZE], int address);
-    void set_mem_value(char mem[MEM_SIZE], int address, char value);
+    void set_mem_value(char mem[MEM_SIZE], int address, int value);
 #endif
