@@ -1,7 +1,7 @@
 .name "Julien Lepers"
 .comment "Ouai, Ouai Ouai, Ouai"
 
-jump: sti r1, %7, %1
+begin:
 live %1
 fork %100
 zjmp %:init
