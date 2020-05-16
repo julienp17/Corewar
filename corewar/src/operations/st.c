@@ -11,7 +11,7 @@
 int st(vm_t *vm, proc_t *proc)
 {
     int reg_nb = 0;
-    char to_store = 0;
+    int to_store = 0;
     int value = 0;
 
     reg_nb = proc->instruction->args[0].value;

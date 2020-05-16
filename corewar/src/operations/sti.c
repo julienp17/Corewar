@@ -12,7 +12,7 @@ static int get_total_offset(char mem[MEM_SIZE], proc_t *proc);
 int sti(vm_t *vm, proc_t *proc)
 {
     int offset = 0;
-    char to_store = 0;
+    int to_store = 0;
     int reg_nb = 0;
 
     reg_nb = proc->instruction->args[0].value;
