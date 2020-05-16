@@ -1,25 +1,21 @@
 /*
 ** EPITECH PROJECT, 2020
-** corewar
+** Corewar VM
 ** File description:
-** and
+** Execute an 'and' instruction
 */
 
 #include "vm.h"
-#include "my.h"
 
 int and(vm_t *vm, proc_t *proc)
 {
     int reg_nb = 0;
-    int add1 = 0;
-    int add2 = 0;
+    int left_operand = 0;
+    int right_operand = 0;
 
-    (void)vm;
-    reg_nb = proc->instruction->args[0].value;
-    add1 = proc->regs[reg_nb - 1];
-    reg_nb = proc->instruction->args[1].value;
-    add2 = proc->regs[reg_nb - 1];
+    left_operand =  argument_get_value(vm->mem, proc, 0, IDX_MOD);
+    right_operand = argument_get_value(vm->mem, proc, 1, IDX_MOD);
     reg_nb = proc->instruction->args[2].value;
-    proc->regs[reg_nb - 1] = add1 & add2;
+    proc->regs[reg_nb - 1] = left_operand & right_operand;
     return (proc->regs[reg_nb - 1]);
 }

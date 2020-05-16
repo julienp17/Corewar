@@ -20,6 +20,7 @@ SRC_F		=	op.c \
 				arguments/argument_is_index.c \
 				arguments/argument_get_size.c \
 				arguments/arguments_are_correct.c \
+				arguments/argument_get_value.c \
 				get_opt/my_get_opt.c \
 				get_opt/free_list.c \
 				get_opt/add_info.c 	\
@@ -36,9 +37,11 @@ SRC_F		=	op.c \
 				operations/or.c \
 				operations/xor.c \
 				operations/zjmp.c \
+				operations/ldi.c \
 				operations/sti.c \
 				operations/fork.c \
 				operations/lld.c \
+				operations/lldi.c \
 				operations/lfork.c \
 				operations/aff.c \
 				structures/champion/champion_load_header.c \
