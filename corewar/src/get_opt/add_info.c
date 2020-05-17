@@ -26,7 +26,8 @@ int elem_add_n(champion_data_t *add, char **av, int i, get_opt_t *opt)
         add->load_address = my_atoi(av[i]);
         i++;
     }
-    if (av[i] != NULL && my_strcmp("-a", av[i]) && my_strcmp("-n", av[i]) && my_strcmp("-dump", av[i])) {
+    if (av[i] != NULL && my_strcmp("-a", av[i])
+        && my_strcmp("-n", av[i]) && my_strcmp("-dump", av[i])) {
         add->file_path = my_strdup(av[i]);
     }
     else
@@ -46,14 +47,13 @@ int elem_add_a(champion_data_t *add, char **av, int i, get_opt_t *tmp)
         add->prog_nb = my_atoi(av[i]);
         error_name(add);
         i++;
-    }
-    else {
+    } else {
         add->prog_nb = get_prog_nb(tmp->prog);
     }
-    if (av[i] != NULL && my_strcmp("-a", av[i]) && my_strcmp("-n", av[i]) && my_strcmp("-dump", av[i])) {
+    if (av[i] != NULL && my_strcmp("-a", av[i])
+        && my_strcmp("-n", av[i]) && my_strcmp("-dump", av[i])) {
         add->file_path = my_strdup(av[i]);
-    }
-    else
+    } else
         usage_display();
     return (i);
 }
