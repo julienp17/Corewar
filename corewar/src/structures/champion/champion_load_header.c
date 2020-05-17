@@ -21,7 +21,7 @@ int champion_load_header(champion_t *champion, int fd)
         my_puterr("Wrong executable magic number.\n");
         return (EXIT_FAILURE);
     }
-    return(EXIT_SUCCESS);
+    return (EXIT_SUCCESS);
 }
 
 static int fill_header(champion_t *champion, int fd)
